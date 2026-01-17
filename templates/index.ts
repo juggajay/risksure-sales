@@ -11,7 +11,7 @@ import {
 import {
   getBusinessTemplate,
   getBusinessSubject,
-  getBusinessTextTemplate,
+  getBusinessMinimalTemplate,
   businessSequence,
 } from "./business";
 
@@ -86,17 +86,17 @@ export function getDelayDays(tier: Tier, step: number): number {
   return config.delayDays;
 }
 
-// Get plain text template for Step 0 (better deliverability - lands in Primary inbox)
-export function getTextTemplate(
+// Get minimal HTML template for Step 0 (better deliverability - looks like plain text)
+export function getMinimalTemplate(
   tier: Tier,
   step: number,
   variant: Variant,
   params: TemplateParams
 ): string | null {
-  // Only business tier has text templates for now
-  // Only Step 0 uses plain text (first touch)
+  // Only business tier has minimal templates for now
+  // Only Step 0 uses minimal HTML (first touch)
   if (tier === "business" && step === 0) {
-    return getBusinessTextTemplate(step, variant, params);
+    return getBusinessMinimalTemplate(step, variant, params);
   }
   return null;
 }
