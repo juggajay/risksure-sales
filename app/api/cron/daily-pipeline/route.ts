@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { validateEmail } from "@/lib/validation";
 import { enrichLead } from "@/lib/enrichment";
 import { sendEmail, sendNotification } from "@/lib/resend";
-import { getTemplate, getSubject, getMaxSteps } from "@/templates";
+import { getTemplate, getTextTemplate, getSubject, getMaxSteps } from "@/templates";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -151,22 +151,26 @@ export async function GET(request: Request) {
         );
         const unsubscribeUrl = `${process.env.UNSUBSCRIBE_BASE_URL}/${unsubscribeToken}`;
 
-        // Get template
-        const html = getTemplate(lead.tier, step, variant, {
+        const templateParams = {
           contactName: lead.contactName,
           companyName: lead.companyName,
           personalizedOpener: lead.personalizedOpener || "",
           unsubscribeUrl,
           calendlyUrl: process.env.CALENDLY_BOOKING_URL || "https://calendly.com/risksure/demo",
-        });
+        };
+
+        // Try plain text first (better deliverability for Step 0)
+        const text = getTextTemplate(lead.tier, step, variant, templateParams);
+        const html = text ? undefined : getTemplate(lead.tier, step, variant, templateParams);
 
         const subject = getSubject(lead.tier, step, variant, lead.companyName);
 
-        // Send email
+        // Send email - use text if available, otherwise HTML
         const result = await sendEmail({
           to: lead.contactEmail,
           subject,
           html,
+          text: text || undefined,
           leadId: lead._id,
           sequenceStep: step,
           variant,

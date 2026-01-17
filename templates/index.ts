@@ -11,6 +11,7 @@ import {
 import {
   getBusinessTemplate,
   getBusinessSubject,
+  getBusinessTextTemplate,
   businessSequence,
 } from "./business";
 
@@ -83,4 +84,19 @@ export function getDelayDays(tier: Tier, step: number): number {
   const config = sequence[step];
   if (!config) return 7; // Default fallback
   return config.delayDays;
+}
+
+// Get plain text template for Step 0 (better deliverability - lands in Primary inbox)
+export function getTextTemplate(
+  tier: Tier,
+  step: number,
+  variant: Variant,
+  params: TemplateParams
+): string | null {
+  // Only business tier has text templates for now
+  // Only Step 0 uses plain text (first touch)
+  if (tier === "business" && step === 0) {
+    return getBusinessTextTemplate(step, variant, params);
+  }
+  return null;
 }

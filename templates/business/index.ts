@@ -8,6 +8,47 @@ interface TemplateParams {
   calendlyUrl: string;
 }
 
+// Plain text versions for Step 0 (better deliverability - lands in Primary)
+export function businessStep0AText(params: TemplateParams): string {
+  return `Hi ${params.contactName},
+
+${params.personalizedOpener}
+
+At ${params.companyName}'s scale, subcontractor compliance isn't just an admin task—it's enterprise risk.
+
+One uninsured subbie incident across your portfolio could mean millions in exposure. And with industrial manslaughter laws, it's not just the company at risk.
+
+We built RiskSure for enterprise operations: portfolio-wide compliance visibility, executive dashboards, and an audit trail that stands up to scrutiny.
+
+Worth a conversation with your leadership team?
+
+Jason
+RiskSure.AI
+
+---
+Unsubscribe: ${params.unsubscribeUrl}`;
+}
+
+export function businessStep0BText(params: TemplateParams): string {
+  return `Hi ${params.contactName},
+
+${params.personalizedOpener}
+
+Quick question: If WorkSafe walked into ${params.companyName} tomorrow, could you show them exactly which subbies have valid insurance across every project?
+
+Most enterprise builders we talk to can't. The data exists—scattered across spreadsheets, Cm3, email threads—but pulling it together for an audit is a nightmare.
+
+That's the gap we built RiskSure to close. Not another system to manage, but a single answer when someone asks "are we covered?"
+
+Is this a problem you're dealing with?
+
+Jason
+RiskSure.AI
+
+---
+Unsubscribe: ${params.unsubscribeUrl}`;
+}
+
 export const businessSequence = [
   {
     step: 0,
@@ -214,4 +255,20 @@ export function getBusinessSubject(
 
   const subject = variant === "A" ? config.subjectA : config.subjectB;
   return subject.replace("{{company}}", companyName);
+}
+
+// Get plain text template for Step 0 (better deliverability)
+export function getBusinessTextTemplate(
+  step: number,
+  variant: "A" | "B",
+  params: TemplateParams
+): string | null {
+  // Only Step 0 has plain text versions
+  if (step !== 0) return null;
+
+  if (variant === "A") {
+    return businessStep0AText(params);
+  } else {
+    return businessStep0BText(params);
+  }
 }
