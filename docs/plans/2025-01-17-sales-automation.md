@@ -26,7 +26,7 @@ When ALL phases are complete and verified working, output:
 <!-- Claude: Update checkboxes as you complete each task -->
 
 ### Phase 1: Project Setup
-- [ ] Task 1.1: Initialize Next.js Project
+- [x] Task 1.1: Initialize Next.js Project
 - [ ] Task 1.2: Initialize Convex
 
 ### Phase 2: Database Schema
