@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useMutation } from "convex/react";
+import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 
@@ -139,7 +139,7 @@ export default function PipelinePage() {
           message: data.error || "Pipeline failed",
         });
       }
-    } catch (error) {
+    } catch {
       setLastResult({
         success: false,
         message: "Failed to run pipeline",
@@ -251,7 +251,7 @@ export default function PipelinePage() {
           </div>
           <div className="mt-6 pt-4 border-t border-[var(--border-subtle)] space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-[var(--text-tertiary)]">Today's limit</span>
+              <span className="text-[var(--text-tertiary)]">Today&apos;s limit</span>
               <span className="font-mono text-[var(--text-secondary)]">{currentLimit}</span>
             </div>
             <div className="flex items-center justify-between text-sm">
