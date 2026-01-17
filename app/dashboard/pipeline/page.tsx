@@ -114,7 +114,7 @@ export default function PipelinePage() {
   const [isRunning, setIsRunning] = useState(false);
   const [lastResult, setLastResult] = useState<{ success: boolean; message: string } | null>(null);
 
-  const warmingConfig = useQuery(api.warming.getConfig);
+  const warmingConfig = useQuery(api.warming.getStatus);
   const activities = useQuery(api.activities.getRecent, { limit: 10 });
   const stats = useQuery(api.leads.getStats);
 
