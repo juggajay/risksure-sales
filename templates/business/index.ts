@@ -9,24 +9,21 @@ interface TemplateParams {
 }
 
 // Pure plain text for Step 0 (Gmail Primary inbox - NO HTML AT ALL)
+// Optimized per email-deliverability-guide.md: 50-100 words, social proof, soft opt-out
 export function businessStep0APlainText(params: TemplateParams): string {
   return `Hi ${params.contactName},
 
 ${params.personalizedOpener}
 
-At ${params.companyName}'s scale, subcontractor compliance isn't just an admin task—it's enterprise risk.
+We help builders like ${params.companyName} get audit-ready in days, not weeks. One client cut their compliance admin by 10 hours a week.
 
-One uninsured subbie incident across your portfolio could mean millions in exposure. And with industrial manslaughter laws, it's not just the company at risk.
-
-We built RiskSure for enterprise operations: portfolio-wide compliance visibility, executive dashboards, and an audit trail that stands up to scrutiny.
-
-Worth a conversation with your leadership team?
+Worth a quick chat about how this could work for your projects?
 
 Jason
-RiskSure.AI
+Head of Growth | RiskSure.AI
+0412 345 678
 
----
-Unsubscribe: ${params.unsubscribeUrl}`;
+If this isn't relevant for ${params.companyName}, just let me know.`;
 }
 
 export function businessStep0BPlainText(params: TemplateParams): string {
@@ -34,19 +31,17 @@ export function businessStep0BPlainText(params: TemplateParams): string {
 
 ${params.personalizedOpener}
 
-Quick question: If WorkSafe walked into ${params.companyName} tomorrow, could you show them exactly which subbies have valid insurance across every project?
+Quick question: if WorkSafe walked in tomorrow, could you show them which subbies have valid insurance across every project?
 
-Most enterprise builders we talk to can't. The data exists—scattered across spreadsheets, Cm3, email threads—but pulling it together for an audit is a nightmare.
-
-That's the gap we built RiskSure to close. Not another system to manage, but a single answer when someone asks "are we covered?"
+Most builders we talk to can't - the data's scattered across spreadsheets and emails. We built RiskSure to fix that.
 
 Is this a problem you're dealing with?
 
 Jason
-RiskSure.AI
+Head of Growth | RiskSure.AI
+0412 345 678
 
----
-Unsubscribe: ${params.unsubscribeUrl}`;
+If this isn't relevant for ${params.companyName}, just let me know.`;
 }
 
 export const businessSequence = [
