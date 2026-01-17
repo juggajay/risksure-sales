@@ -265,4 +265,21 @@ export default defineSchema({
     isActive: v.boolean(),
   })
     .index("by_tier_step", ["tier", "step"]),
+
+  // ============================================
+  // EMAIL TEMPLATES (Editable)
+  // ============================================
+  emailTemplates: defineTable({
+    step: v.number(),               // 0-4
+    subjectA: v.string(),
+    subjectB: v.string(),
+    body: v.string(),               // Default body (for non-step-2)
+    bodyVelocity: v.optional(v.string()),    // Step 2 tier-specific
+    bodyCompliance: v.optional(v.string()),  // Step 2 tier-specific
+    bodyBusiness: v.optional(v.string()),    // Step 2 tier-specific
+    delayDays: v.number(),
+    isActive: v.boolean(),
+    updatedAt: v.number(),
+  })
+    .index("by_step", ["step"]),
 });

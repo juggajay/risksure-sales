@@ -2,6 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import Link from "next/link";
 
 const sequenceSteps = [
   { step: 0, name: "Initial Outreach", timing: "Day 0", description: "Personalized opener + COC pain point" },
@@ -150,9 +151,12 @@ export default function CampaignsPage() {
           <p className="text-[var(--text-secondary)] mt-1">Email sequence performance and A/B test results</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="px-4 py-2.5 bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-lg text-sm font-medium hover:bg-[var(--bg-hover)] transition-colors border border-[var(--border-subtle)]">
+          <Link
+            href="/dashboard/templates"
+            className="px-4 py-2.5 bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-lg text-sm font-medium hover:bg-[var(--bg-hover)] transition-colors border border-[var(--border-subtle)]"
+          >
             View Templates
-          </button>
+          </Link>
         </div>
       </div>
 
