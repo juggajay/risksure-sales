@@ -41,81 +41,11 @@ function WarmingGauge({ current, target }: { current: number; target: number }) 
   );
 }
 
-function ActivityItem({ activity }: { activity: { type: string; description: string; _creationTime: number } }) {
-  const typeConfig: Record<string, { icon: React.ReactNode; color: string }> = {
-    pipeline_started: {
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
-        </svg>
-      ),
-      color: "var(--info)",
-    },
-    pipeline_completed: {
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      color: "var(--success)",
-    },
-    email_sent: {
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-        </svg>
-      ),
-      color: "var(--accent-primary)",
-    },
-    lead_enriched: {
-      icon: (
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
-        </svg>
-      ),
-      color: "var(--warning)",
-    },
-  };
-
-  const config = typeConfig[activity.type] || {
-    icon: (
-      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    color: "var(--text-tertiary)",
-  };
-
-  const timeAgo = (timestamp: number) => {
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    if (seconds < 60) return "just now";
-    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
-    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-    return `${Math.floor(seconds / 86400)}d ago`;
-  };
-
-  return (
-    <div className="flex items-start gap-3 py-3">
-      <div
-        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ backgroundColor: `color-mix(in srgb, ${config.color} 15%, transparent)`, color: config.color }}
-      >
-        {config.icon}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm text-[var(--text-secondary)]">{activity.description}</p>
-        <p className="text-xs text-[var(--text-muted)] mt-0.5">{timeAgo(activity._creationTime)}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function PipelinePage() {
   const [isRunning, setIsRunning] = useState(false);
   const [lastResult, setLastResult] = useState<{ success: boolean; message: string } | null>(null);
 
   const warmingConfig = useQuery(api.warming.getStatus);
-  const activities = useQuery(api.activities.getRecent, { limit: 10 });
   const stats = useQuery(api.leads.getStats);
 
   const runPipeline = async () => {
@@ -283,30 +213,6 @@ export default function PipelinePage() {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Activity Feed */}
-      <div className="bg-[var(--bg-secondary)] rounded-xl border border-[var(--border-subtle)] overflow-hidden">
-        <div className="px-6 py-4 border-b border-[var(--border-subtle)]">
-          <h2 className="font-semibold text-[var(--text-primary)]">Recent Activity</h2>
-        </div>
-        <div className="p-6">
-          {activities && activities.length > 0 ? (
-            <div className="divide-y divide-[var(--border-subtle)]">
-              {activities.map((activity) => (
-                <ActivityItem key={activity._id} activity={activity} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <svg className="w-12 h-12 mx-auto text-[var(--text-muted)] opacity-50 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <p className="text-[var(--text-tertiary)]">No recent activity</p>
-              <p className="text-sm text-[var(--text-muted)] mt-1">Run the pipeline to see activity here</p>
-            </div>
-          )}
         </div>
       </div>
 
