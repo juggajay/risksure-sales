@@ -81,7 +81,7 @@ export default function PipelinePage() {
 
   const readyLeads = stats?.byStatus?.ready || 0;
   const currentLimit = warmingConfig?.currentDailyLimit || 20;
-  const targetLimit = warmingConfig?.targetDailyLimit || 200;
+  const targetLimit = warmingConfig?.maxDailyLimit || 200;
 
   return (
     <div className="space-y-8 animate-fade-in">
