@@ -12,7 +12,8 @@ function getResendClient(): Resend {
 export interface SendEmailParams {
   to: string;
   subject: string;
-  html: string;
+  html?: string;
+  text?: string;
   leadId: string;
   sequenceStep: number;
   variant: "A" | "B";
@@ -29,18 +30,29 @@ export async function sendEmail(params: SendEmailParams): Promise<SendEmailResul
   try {
     const resend = getResendClient();
 
-    const { data, error } = await resend.emails.send({
-      from: "Jason <jason@risksure.ai>",
-      to: params.to,
-      subject: params.subject,
-      html: params.html,
-      tags: [
-        { name: "lead_id", value: params.leadId },
-        { name: "sequence_step", value: String(params.sequenceStep) },
-        { name: "variant", value: params.variant },
-        { name: "tier", value: params.tier },
-      ],
-    });
+    const tags = [
+      { name: "lead_id", value: params.leadId },
+      { name: "sequence_step", value: String(params.sequenceStep) },
+      { name: "variant", value: params.variant },
+      { name: "tier", value: params.tier },
+    ];
+
+    // Use plain text if provided (for Gmail Primary), otherwise HTML
+    const { data, error } = params.text
+      ? await resend.emails.send({
+          from: "Jason <jason@risksure.ai>",
+          to: params.to,
+          subject: params.subject,
+          text: params.text,
+          tags,
+        })
+      : await resend.emails.send({
+          from: "Jason <jason@risksure.ai>",
+          to: params.to,
+          subject: params.subject,
+          html: params.html!,
+          tags,
+        });
 
     if (error) {
       return { success: false, error: error.message };

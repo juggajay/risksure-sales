@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { validateEmail } from "@/lib/validation";
 import { enrichLead } from "@/lib/enrichment";
 import { sendEmail, sendNotification } from "@/lib/resend";
-import { getTemplate, getMinimalTemplate, getSubject, getMaxSteps } from "@/templates";
+import { getTemplate, getPlainTextTemplate, getSubject, getMaxSteps } from "@/templates";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -159,17 +159,18 @@ export async function GET(request: Request) {
           calendlyUrl: process.env.CALENDLY_BOOKING_URL || "https://calendly.com/risksure/demo",
         };
 
-        // Try minimal HTML first (better deliverability for Step 0)
-        const minimalHtml = getMinimalTemplate(lead.tier, step, variant, templateParams);
-        const html = minimalHtml || getTemplate(lead.tier, step, variant, templateParams);
+        // Use plain text for Step 0 (Gmail Primary), HTML for follow-ups
+        const plainText = getPlainTextTemplate(lead.tier, step, variant, templateParams);
+        const html = plainText ? undefined : getTemplate(lead.tier, step, variant, templateParams);
 
         const subject = getSubject(lead.tier, step, variant, lead.companyName);
 
-        // Send email
+        // Send email - plain text lands in Gmail Primary
         const result = await sendEmail({
           to: lead.contactEmail,
           subject,
           html,
+          text: plainText || undefined,
           leadId: lead._id,
           sequenceStep: step,
           variant,

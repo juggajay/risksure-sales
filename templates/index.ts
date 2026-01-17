@@ -11,7 +11,7 @@ import {
 import {
   getBusinessTemplate,
   getBusinessSubject,
-  getBusinessMinimalTemplate,
+  getBusinessPlainText,
   businessSequence,
 } from "./business";
 
@@ -86,17 +86,17 @@ export function getDelayDays(tier: Tier, step: number): number {
   return config.delayDays;
 }
 
-// Get minimal HTML template for Step 0 (better deliverability - looks like plain text)
-export function getMinimalTemplate(
+// Get pure plain text template for Step 0 (Gmail Primary inbox)
+export function getPlainTextTemplate(
   tier: Tier,
   step: number,
   variant: Variant,
   params: TemplateParams
 ): string | null {
-  // Only business tier has minimal templates for now
-  // Only Step 0 uses minimal HTML (first touch)
+  // Only business tier has plain text for now
+  // Only Step 0 uses plain text (first touch)
   if (tier === "business" && step === 0) {
-    return getBusinessMinimalTemplate(step, variant, params);
+    return getBusinessPlainText(step, variant, params);
   }
   return null;
 }
