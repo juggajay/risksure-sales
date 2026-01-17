@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resendClient: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resendClient) {
+    resendClient = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendClient;
+}
 
 export interface SendEmailParams {
   to: string;
@@ -20,6 +27,7 @@ export interface SendEmailResult {
 
 export async function sendEmail(params: SendEmailParams): Promise<SendEmailResult> {
   try {
+    const resend = getResendClient();
     const { data, error } = await resend.emails.send({
       from: "Jason <jason@risksure.ai>",
       to: params.to,
@@ -51,6 +59,7 @@ export async function sendNotification(
   if (!process.env.NOTIFICATION_EMAIL) return;
 
   try {
+    const resend = getResendClient();
     await resend.emails.send({
       from: "RiskSure Alerts <alerts@risksure.ai>",
       to: process.env.NOTIFICATION_EMAIL,
