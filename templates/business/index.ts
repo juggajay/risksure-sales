@@ -13,7 +13,7 @@ export const businessSequence = [
     step: 0,
     delayDays: 0,
     subjectA: "Portfolio compliance risk at {{company}}",
-    subjectB: "Executive visibility into subbie compliance",
+    subjectB: "Audit question for {{company}}",
   },
   {
     step: 1,
@@ -58,10 +58,10 @@ export function businessStep0B(params: TemplateParams): string {
   const content = `
     <p>Hi ${params.contactName},</p>
     <p>${params.personalizedOpener}</p>
-    <p>Quick question for you: Does your leadership team have real-time visibility into subbie compliance across all projects?</p>
-    <p>Most enterprise builders we talk to have the data somewhere—spreadsheets, Cm3, email chains—but no single source of truth.</p>
-    <p>RiskSure gives you a portfolio-wide dashboard: every project, every subbie, every certificate. Green light, red light, drill down as needed.</p>
-    <p>Is this on your radar?</p>
+    <p>Quick question: If WorkSafe walked into ${params.companyName} tomorrow, could you show them exactly which subbies have valid insurance across every project?</p>
+    <p>Most enterprise builders we talk to can't. The data exists—scattered across spreadsheets, Cm3, email threads—but pulling it together for an audit is a nightmare.</p>
+    <p>That's the gap we built RiskSure to close. Not another system to manage, but a single answer when someone asks "are we covered?"</p>
+    <p>Is this a problem you're dealing with?</p>
     <p>Jason<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
