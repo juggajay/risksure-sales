@@ -1,0 +1,10 @@
+{{contactName}},
+
+I've reached out a few times about how {{companyName}} handles subbie certificates - haven't heard back, so I'll assume the timing isn't right.
+
+If things change and you want to see how other builders have streamlined this, the door's open: {{calendlyUrl}}
+
+All the best with the projects.
+
+{{senderName}}
+{{senderPhone}}

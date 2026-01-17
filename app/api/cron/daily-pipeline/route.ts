@@ -157,6 +157,8 @@ export async function GET(request: Request) {
           personalizedOpener: lead.personalizedOpener || "",
           unsubscribeUrl,
           calendlyUrl: process.env.CALENDLY_BOOKING_URL || "https://calendly.com/risksure/demo",
+          estimatedSubbies: lead.estimatedSubbies,
+          state: lead.state,
         };
 
         // Use plain text for Step 0 (Gmail Primary), HTML for follow-ups

@@ -1,0 +1,15 @@
+{{personalizedOpener}}
+
+When a new subbie comes on, someone on your team gets their COC, opens the PDF, checks the coverage and expiry, matches it to your requirements, logs it somewhere, and follows up if something's off.
+
+Multiply that by {{estimatedSubbies}} subbies and 3-4 certs each.
+
+We built something that changes that - each subbie gets their own portal to upload their docs, we verify everything against your requirements, and your team just reviews what we flag.
+
+We'd love to show you how it works if you're interested.
+
+{{senderName}}
+{{senderTitle}} | RiskSure.AI
+{{senderPhone}}
+
+If this isn't relevant for {{companyName}}, just let me know.

@@ -1,0 +1,12 @@
+{{contactName}},
+
+Quick thought:
+
+At {{companyName}}'s scale, you've probably got thousands of certificates across your portfolio. That's either a full-time job for someone, or it's falling through the cracks.
+
+We work with builders managing 300+ subbies where the compliance team has complete visibility across every project - and spends most of their time on actual risk management, not document admin.
+
+If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+
+{{senderName}}
+{{senderPhone}}

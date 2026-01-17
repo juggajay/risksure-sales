@@ -1,0 +1,12 @@
+{{contactName}},
+
+Quick thought:
+
+With {{estimatedSubbies}} subbies across multiple projects, you're probably processing 600-1000 certificates a year. At 20-30 minutes each - that's a lot of hours spent on admin work that doesn't need a human.
+
+We've got builders at your scale where the compliance team spends a few hours a week reviewing exceptions. Everything else - the collection, verification, tracking, follow-ups - is handled.
+
+If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+
+{{senderName}}
+{{senderPhone}}

@@ -1,0 +1,15 @@
+{{contactName}},
+
+One more thought and I'll leave you alone.
+
+A {{state}} builder similar to {{companyName}} switched to us six months ago. Their compliance admin went from 15+ hours a week to about 2 hours reviewing exceptions.
+
+Their subbies actually upload on time now (because it's free and takes 60 seconds through their own portal). No more chasing.
+
+If you want to see what that looks like, we'd love to walk you through it: {{calendlyUrl}}
+
+Either way, appreciate your time.
+
+{{senderName}}
+{{senderTitle}} | RiskSure.AI
+{{senderPhone}}

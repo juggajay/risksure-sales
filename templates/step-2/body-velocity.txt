@@ -1,0 +1,12 @@
+{{contactName}},
+
+Quick thought:
+
+With {{estimatedSubbies}} subbies, you're probably processing 200-300 certificates a year. At 20-30 minutes each (download, open, check, log, follow up) - that's 100+ hours of admin work annually.
+
+We've got builders doing that same volume where their team spends maybe 2 hours a month reviewing exceptions. The rest is handled.
+
+If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+
+{{senderName}}
+{{senderPhone}}

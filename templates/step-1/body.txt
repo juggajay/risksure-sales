@@ -1,0 +1,15 @@
+{{contactName}},
+
+Following up on my last note.
+
+The short version: we've built a system where subbies upload their own docs through their own portal, we verify everything in about 30 seconds, and your team just reviews the exceptions.
+
+No chasing. No spreadsheets. No manual checking.
+
+Here's a 2-minute video showing the workflow: {{demoVideoUrl}}
+
+Or if you'd prefer a live walkthrough, grab a time here: {{calendlyUrl}}
+
+{{senderName}}
+
+If this isn't relevant, just let me know and I'll stop following up.
