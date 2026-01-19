@@ -2,23 +2,25 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 // Default templates - used for initialization
+// Updated January 2026: Added regulatory urgency, "free for subbies" earlier,
+// honest early-adopter positioning, WorkSafe audit trail angle
 const defaultTemplates = {
   subjects: {
     step0: {
       A: "Quick question about {{companyName}}'s COC process",
-      B: "{{contactName}} - how do you handle subbie certificates?",
+      B: "{{contactName}} - subbie insurance compliance",
     },
     step1: {
       A: "Re: Quick question about {{companyName}}'s COC process",
-      B: "The workflow shift",
+      B: "The workflow shift (+ Procore sync)",
     },
     step2: {
-      A: "What {{companyName}}'s compliance team could stop doing",
-      B: "30 seconds vs 30 minutes",
+      A: "{{contactName}} - the compliance maths",
+      B: "Beyond time savings - the liability angle",
     },
     step3: {
-      A: "How [similar company] handles COC compliance now",
-      B: "The maths on certificate admin",
+      A: "Early adopter opportunity",
+      B: "What {{state}} builders are switching to",
     },
     step4: {
       A: "Closing the loop",
@@ -30,11 +32,17 @@ const defaultTemplates = {
 
 When a new subbie comes on, someone on your team gets their COC, opens the PDF, checks the coverage and expiry, matches it to your requirements, logs it somewhere, and follows up if something's off.
 
-Multiply that by {{estimatedSubbies}} subbies and 3-4 certs each.
+Multiply that by {{estimatedSubbies}} subbies and 3-4 certs each. That's a lot of admin hours - and a lot of liability if something slips through.
 
-We built something that changes that - each subbie gets their own portal to upload their docs, we verify everything against your requirements, and your team just reviews what we flag.
+We built something that changes that:
+- Each subbie gets their own portal (free for them, no account required - just a link)
+- They upload their docs in 60 seconds
+- Our AI verifies everything against your requirements in 30 seconds
+- Your team just reviews what we flag
 
-We'd love to show you how it works if you're interested.
+You get a timestamped audit trail of every verification - useful if WorkSafe ever asks.
+
+Happy to show you how it works if you're interested: {{calendlyUrl}}
 
 {{senderName}}
 {{senderTitle}} | RiskSure.AI
@@ -46,53 +54,68 @@ If this isn't relevant for {{companyName}}, just let me know.`,
 
 Following up on my last note.
 
-The short version: we've built a system where subbies upload their own docs through their own portal, we verify everything in about 30 seconds, and your team just reviews the exceptions.
+The short version: subbies upload their own docs through a free portal (no login, just a secure link), we verify everything in about 30 seconds, and your team just reviews the exceptions.
 
 No chasing. No spreadsheets. No manual checking.
 
-Here's a 2-minute video showing the workflow: {{demoVideoUrl}}
+Already using Procore? We sync directly - your subbie compliance status shows up right in your project.
 
-Or if you'd prefer a live walkthrough, grab a time here: {{calendlyUrl}}
+Here's a 2-minute video showing how it works: {{demoVideoUrl}}
+
+Or grab a time for a live walkthrough: {{calendlyUrl}}
 
 {{senderName}}
 
-If this isn't relevant, just let me know and I'll stop following up.`,
+If this isn't relevant, just reply and I'll stop following up.`,
 
     step2_velocity: `{{contactName}},
 
-Quick thought:
+Two angles to consider:
 
-With {{estimatedSubbies}} subbies, you're probably processing 200-300 certificates a year. At 20-30 minutes each (download, open, check, log, follow up) - that's 100+ hours of admin work annually.
+**The time angle:** With {{estimatedSubbies}} subbies, you're probably processing 200-300 certificates a year. At 20-30 minutes each (download, open, check, log, follow up) - that's 100+ hours of admin work annually.
 
-We've got builders doing that same volume where their team spends maybe 2 hours a month reviewing exceptions. The rest is handled.
+**The liability angle:** With Industrial Manslaughter laws now active in {{state}}, you're personally liable if an uninsured subbie causes an incident on your site. The Pafburn ruling confirmed you can't contract that away - head contractors carry the risk.
 
-If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+We've built something that handles both - automates the admin AND gives you a timestamped audit trail proving you verified every certificate. If WorkSafe walks in, you show them a system, not a spreadsheet.
+
+Worth a 15-minute look? {{calendlyUrl}}
 
 {{senderName}}
 {{senderPhone}}`,
 
     step2_compliance: `{{contactName}},
 
-Quick thought:
+Two angles to consider:
 
-With {{estimatedSubbies}} subbies across multiple projects, you're probably processing 600-1000 certificates a year. At 20-30 minutes each - that's a lot of hours spent on admin work that doesn't need a human.
+**The time angle:** With {{estimatedSubbies}} subbies across multiple projects, you're probably processing 600-1000 certificates a year. That's a lot of hours spent on admin work that doesn't need a human.
 
-We've got builders at your scale where the compliance team spends a few hours a week reviewing exceptions. Everything else - the collection, verification, tracking, follow-ups - is handled.
+**The liability angle:** Industrial Manslaughter laws are now active in {{state}} - up to $20M in fines and personal imprisonment for officers. The Pafburn High Court ruling confirmed head contractors can't delegate this liability to subbies.
 
-If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+We've built something that handles both:
+- Automates collection and verification (AI checks in 30 seconds)
+- Creates timestamped audit trail for every verification
+- Flags exceptions for your team to review
+
+Your compliance team spends time on actual risk management, not document admin.
+
+Worth a look? {{calendlyUrl}}
 
 {{senderName}}
 {{senderPhone}}`,
 
     step2_business: `{{contactName}},
 
-Quick thought:
+At {{companyName}}'s scale, you've got thousands of certificates across your portfolio. That's either a full-time job for someone, or gaps are forming.
 
-At {{companyName}}'s scale, you've probably got thousands of certificates across your portfolio. That's either a full-time job for someone, or it's falling through the cracks.
+With Industrial Manslaughter laws now active nationally and the Pafburn ruling confirming non-delegable duty, those gaps represent serious liability - not just admin inconvenience.
 
-We work with builders managing 300+ subbies where the compliance team has complete visibility across every project - and spends most of their time on actual risk management, not document admin.
+We work with builders managing 300+ subbies where:
+- The compliance team has complete visibility across every project
+- Every verification is timestamped (audit-ready)
+- Subbies actually upload on time (because our portal is free and takes 60 seconds)
+- The team focuses on risk management, not document chasing
 
-If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
+If you'd like to see how this works at enterprise scale: {{calendlyUrl}}
 
 {{senderName}}
 {{senderPhone}}`,
@@ -101,11 +124,13 @@ If that sounds interesting, we'd love to show you how it works: {{calendlyUrl}}
 
 One more thought and I'll leave you alone.
 
-A {{state}} builder similar to {{companyName}} switched to us six months ago. Their compliance admin went from 15+ hours a week to about 2 hours reviewing exceptions.
+We're a new player in this space - purpose-built for Australian construction compliance. No legacy from overseas markets, no charging subbies hundreds of dollars to upload a certificate.
 
-Their subbies actually upload on time now (because it's free and takes 60 seconds through their own portal). No more chasing.
+Early users are seeing their compliance admin drop from 15+ hours/week to 2-3 hours reviewing exceptions. Their subbies actually upload on time because it's free and takes 60 seconds.
 
-If you want to see what that looks like, we'd love to walk you through it: {{calendlyUrl}}
+If you'd be open to being one of our early adopters, we'd make it worth your while on pricing. And you'd have direct input into what we build next.
+
+Interested? {{calendlyUrl}}
 
 Either way, appreciate your time.
 
@@ -115,9 +140,9 @@ Either way, appreciate your time.
 
     step4: `{{contactName}},
 
-I've reached out a few times about how {{companyName}} handles subbie certificates - haven't heard back, so I'll assume the timing isn't right.
+I've reached out a few times about how {{companyName}} handles subbie insurance compliance - haven't heard back, so I'll assume the timing isn't right.
 
-If things change and you want to see how other builders have streamlined this, the door's open: {{calendlyUrl}}
+If things change - whether it's an upcoming audit, a close call with an uninsured subbie, or just wanting to free up admin time - the door's open: {{calendlyUrl}}
 
 All the best with the projects.
 
