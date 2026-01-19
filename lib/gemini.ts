@@ -1,6 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genai = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
+let genai: GoogleGenerativeAI | null = null;
+
+function getGenAI(): GoogleGenerativeAI {
+  if (!genai) {
+    genai = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
+  }
+  return genai;
+}
 
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 1000;
@@ -13,7 +20,7 @@ export async function generateWithGemini(
   prompt: string,
   jsonMode = false
 ): Promise<string> {
-  const model = genai.getGenerativeModel({
+  const model = getGenAI().getGenerativeModel({
     model: "gemini-2.0-flash",
   });
 
