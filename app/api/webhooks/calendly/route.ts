@@ -2,14 +2,50 @@ import { NextResponse } from "next/server";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
 import { sendNotification } from "@/lib/resend";
+import crypto from "crypto";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
+function verifyCalendlySignature(payload: string, signatureHeader: string): boolean {
+  if (!process.env.CALENDLY_WEBHOOK_SECRET) return true; // Skip in dev
+
+  // Calendly signature format: t=<timestamp>,v1=<signature>
+  const parts = signatureHeader.split(",");
+  const timestamp = parts.find((p) => p.startsWith("t="))?.slice(2);
+  const signature = parts.find((p) => p.startsWith("v1="))?.slice(3);
+
+  if (!timestamp || !signature) return false;
+
+  // Calendly signs: timestamp.payload
+  const signedPayload = `${timestamp}.${payload}`;
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.CALENDLY_WEBHOOK_SECRET)
+    .update(signedPayload)
+    .digest("hex");
+
+  try {
+    return crypto.timingSafeEqual(
+      Buffer.from(signature),
+      Buffer.from(expectedSignature)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
-  const payload = await request.json();
+  const payload = await request.text();
+  const signatureHeader = request.headers.get("Calendly-Webhook-Signature") || "";
+
+  // Verify signature in production
+  if (process.env.NODE_ENV === "production") {
+    if (!verifyCalendlySignature(payload, signatureHeader)) {
+      return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
+    }
+  }
 
   // Calendly sends events with this structure
-  const { event, payload: eventData } = payload;
+  const { event, payload: eventData } = JSON.parse(payload);
 
   try {
     if (event === "invitee.created") {
