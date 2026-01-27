@@ -6,7 +6,7 @@ The short version: we've built a system where subbies upload their own docs thro
 
 No chasing. No spreadsheets. No manual checking.
 
-Here's a 2-minute video showing the workflow: {{demoVideoUrl}}
+Here's a 45-second video showing how it works: {{demoVideoUrl}}
 
 Or if you'd prefer a live walkthrough, grab a time here: {{calendlyUrl}}
 

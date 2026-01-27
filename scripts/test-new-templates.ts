@@ -33,7 +33,7 @@ const templateVars = {
   senderTitle: "Founder",
   senderPhone: "0412 345 678",
   calendlyUrl: "https://calendly.com/jaysonryan2107",
-  demoVideoUrl: "https://risksure.ai/demo-video",
+  demoVideoUrl: "https://risksure.ai/demo",
   unsubscribeUrl: "https://sales.risksure.ai/unsubscribe/test-token",
 };
 

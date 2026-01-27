@@ -82,7 +82,7 @@ No chasing. No spreadsheets. No manual checking.
 
 Already using Procore? We sync directly - your subbie compliance status shows up right in your project.
 
-Here's a 2-minute video showing how it works: {{demoVideoUrl}}
+Here's a 45-second video showing how it works: {{demoVideoUrl}}
 
 Or grab a time for a live walkthrough: {{calendlyUrl}}
 
