@@ -4,6 +4,7 @@ import { v } from "convex/values";
 // Default templates - used for initialization
 // Updated January 2026: Added regulatory urgency, "free for subbies" earlier,
 // honest early-adopter positioning, WorkSafe audit trail angle
+// Added FOUNDER50 promo code (50% off first 6 months) to Step 3 and Step 4
 const defaultTemplates = {
   subjects: {
     step0: {
@@ -126,9 +127,9 @@ One more thought and I'll leave you alone.
 
 We're a new player in this space - purpose-built for Australian construction compliance. No legacy from overseas markets, no charging subbies hundreds of dollars to upload a certificate.
 
-Early users are seeing their compliance admin drop from 15+ hours/week to 2-3 hours reviewing exceptions. Their subbies actually upload on time because it's free and takes 60 seconds.
+Here's how it works: your team adds a subbie, they get a portal link, they upload in 60 seconds (free for them, no login required), and our AI verifies against your requirements in 30 seconds. You just review the exceptions.
 
-If you'd be open to being one of our early adopters, we'd make it worth your while on pricing. And you'd have direct input into what we build next.
+If you'd be open to being one of our early adopters, use code FOUNDER50 for 50% off your first 6 months. You'd also get direct input into what we build next.
 
 Interested? {{calendlyUrl}}
 
@@ -143,6 +144,8 @@ Either way, appreciate your time.
 I've reached out a few times about how {{companyName}} handles subbie insurance compliance - haven't heard back, so I'll assume the timing isn't right.
 
 If things change - whether it's an upcoming audit, a close call with an uninsured subbie, or just wanting to free up admin time - the door's open: {{calendlyUrl}}
+
+The FOUNDER50 code (50% off first 6 months) stays valid if you want to revisit later.
 
 All the best with the projects.
 
