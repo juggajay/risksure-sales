@@ -107,11 +107,29 @@ export default function DashboardPage() {
   const recentLeads = useQuery(api.leads.getAll);
 
   const totalLeads = stats?.total || 0;
-  const contacted = stats?.byStatus?.contacted || 0;
-  const opened = stats?.byStatus?.opened || 0;
   const demosScheduled = stats?.byStatus?.demo_scheduled || 0;
 
-  const openRate = contacted > 0 ? Math.round((opened / contacted) * 100) : 0;
+  // Count all leads that have ever been sent an email (contacted + all downstream statuses)
+  const everContacted =
+    (stats?.byStatus?.contacted || 0) +
+    (stats?.byStatus?.opened || 0) +
+    (stats?.byStatus?.clicked || 0) +
+    (stats?.byStatus?.replied || 0) +
+    (stats?.byStatus?.demo_scheduled || 0) +
+    (stats?.byStatus?.nurture || 0) +
+    (stats?.byStatus?.closed_won || 0) +
+    (stats?.byStatus?.closed_lost || 0) +
+    (stats?.byStatus?.unsubscribed || 0) +
+    (stats?.byStatus?.bounced || 0);
+
+  // Count all leads that have opened at least once (opened + all downstream statuses)
+  const everOpened =
+    (stats?.byStatus?.opened || 0) +
+    (stats?.byStatus?.clicked || 0) +
+    (stats?.byStatus?.replied || 0) +
+    (stats?.byStatus?.demo_scheduled || 0);
+
+  const openRate = everContacted > 0 ? Math.round((everOpened / everContacted) * 100) : 0;
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -146,7 +164,7 @@ export default function DashboardPage() {
         />
         <MetricCard
           label="Emails Sent"
-          value={contacted}
+          value={everContacted}
           subValue="Step 0 outreach"
           trend={{ value: 12, isPositive: true }}
           icon={
@@ -159,7 +177,7 @@ export default function DashboardPage() {
         <MetricCard
           label="Open Rate"
           value={`${openRate}%`}
-          subValue={`${opened} opened`}
+          subValue={`${everOpened} opened`}
           icon={
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
