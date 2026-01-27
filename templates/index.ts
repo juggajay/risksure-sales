@@ -41,6 +41,19 @@ const subjects = {
     A: "Closing the loop",
     B: "Last note from me",
   },
+  // Nurture steps (longer delays, re-engagement)
+  step5: {
+    A: "New feature: automated expiry alerts",
+    B: "Product update from RiskSure",
+  },
+  step6: {
+    A: "Still relevant for {{companyName}}?",
+    B: "Quick check-in",
+  },
+  step7: {
+    A: "Final note from RiskSure",
+    B: "One last thought on compliance",
+  },
 };
 
 // ============================================
@@ -172,12 +185,56 @@ All the best with the projects.
 
 {{senderName}}
 {{senderPhone}}`,
+
+  // ============================================
+  // NURTURE STEPS (5-7) — longer delays, re-engagement
+  // ============================================
+
+  step5: `{{contactName}},
+
+It's been a while since we last connected. Wanted to share a quick update.
+
+We've just launched automated expiry alerts — our system now monitors every certificate in real time and notifies both you and the subbie before anything lapses. No more manual tracking or surprise gaps.
+
+A few {{state}} builders have told us this alone saves them 5+ hours a week.
+
+If things have changed on your end and compliance is back on the radar: {{calendlyUrl}}
+
+{{senderName}}
+{{senderPhone}}`,
+
+  step6: `{{contactName}},
+
+Just a quick check-in from RiskSure.
+
+Is subbie insurance compliance still a pain point for {{companyName}}? If you've solved it another way, genuinely curious to hear what's working.
+
+If it's still on the back burner, no pressure. But if a 15-minute look would be useful, I'm here: {{calendlyUrl}}
+
+Either way, hope the projects are going well.
+
+{{senderName}}`,
+
+  step7: `{{contactName}},
+
+This will be my last note.
+
+If {{companyName}} ever needs a better way to handle subbie insurance verification — whether it's before an audit, after a near-miss, or just to free up admin time — we're here.
+
+We've helped dozens of Australian builders go from spreadsheets to a fully automated compliance system. The door's always open: {{calendlyUrl}}
+
+All the best.
+
+{{senderName}}
+{{senderTitle}} | RiskSure.AI
+{{senderPhone}}`,
 };
 
 // ============================================
 // SEQUENCE CONFIG
 // ============================================
 
+// Initial outreach sequence (steps 0-4)
 const sequenceConfig = {
   velocity: [
     { step: 0, delayDays: 0 },
@@ -202,6 +259,13 @@ const sequenceConfig = {
   ],
 };
 
+// Nurture sequence (steps 5-7) — shared across all tiers
+const nurtureSequenceConfig = [
+  { step: 5, delayDays: 45 },
+  { step: 6, delayDays: 60 },
+  { step: 7, delayDays: 90 },
+];
+
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
@@ -215,7 +279,7 @@ function replaceVariables(template: string, params: TemplateParams): string {
     calendlyUrl: params.calendlyUrl,
     estimatedSubbies: String(params.estimatedSubbies || 50),
     state: params.state || "NSW",
-    senderName: params.senderName || "Jason",
+    senderName: params.senderName || "Jayson",
     senderTitle: params.senderTitle || "Founder",
     senderPhone: params.senderPhone || "0412 345 678",
     demoVideoUrl: params.demoVideoUrl || "https://risksure.ai/demo",
@@ -236,16 +300,19 @@ export function getSubject(
   tier: Tier,
   step: number,
   variant: Variant,
-  companyName: string
+  companyName: string,
+  contactName?: string,
+  state?: string
 ): string {
   const stepKey = `step${step}` as keyof typeof subjects;
   const subjectTemplate = subjects[stepKey]?.[variant] || subjects.step0[variant];
   return replaceVariables(subjectTemplate, {
-    contactName: "",
+    contactName: contactName || "",
     companyName,
     personalizedOpener: "",
     unsubscribeUrl: "",
     calendlyUrl: "",
+    state,
   });
 }
 
@@ -263,7 +330,14 @@ export function getPlainTextTemplate(
   } else {
     const stepKey = `step${step}` as keyof typeof bodies;
     const body = bodies[stepKey];
-    template = typeof body === "string" ? body : bodies.step0;
+    if (typeof body === "string") {
+      template = body;
+    } else if (body === undefined) {
+      // Step not found — shouldn't happen but fall back gracefully
+      return null;
+    } else {
+      template = bodies.step0;
+    }
   }
 
   return replaceVariables(template, params);
@@ -287,7 +361,21 @@ export function getMaxSteps(tier: Tier): number {
   return sequenceConfig[tier].length;
 }
 
+export function getNurtureMaxSteps(): number {
+  return nurtureSequenceConfig.length + 5; // steps 5-7 = total of 8 steps (0-7)
+}
+
+export function getNurtureSequence() {
+  return nurtureSequenceConfig;
+}
+
 export function getDelayDays(tier: Tier, step: number): number {
+  // Check nurture steps first
+  if (step >= 5) {
+    const nurtureConfig = nurtureSequenceConfig.find((c) => c.step === step);
+    if (nurtureConfig) return nurtureConfig.delayDays;
+    return 30;
+  }
   const sequence = sequenceConfig[tier];
   const config = sequence[step];
   if (!config) return 7;

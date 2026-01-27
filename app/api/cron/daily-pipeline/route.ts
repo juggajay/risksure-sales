@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { validateEmail } from "@/lib/validation";
 import { enrichLead } from "@/lib/enrichment";
 import { sendEmail, sendNotification } from "@/lib/resend";
-import { getTemplate, getPlainTextTemplate, getSubject, getMaxSteps } from "@/templates";
+import { getTemplate, getPlainTextTemplate, getSubject, getMaxSteps, getNurtureMaxSteps } from "@/templates";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -22,6 +22,8 @@ export async function GET(request: Request) {
     validated: 0,
     enriched: 0,
     emailsSent: 0,
+    nurtureEmailsSent: 0,
+    nurtureCompleted: 0,
     errors: [] as string[],
   };
 
@@ -129,11 +131,28 @@ export async function GET(request: Request) {
       limit: currentWarmingStatus.emailsRemaining,
     });
 
+    // Terminal statuses — never send to these leads
+    const terminalStatuses = new Set([
+      "replied", "unsubscribed", "bounced", "demo_scheduled",
+      "demo_complete", "trial", "closed_won", "closed_lost",
+      "nurture", "invalid_email",
+    ]);
+
     for (const lead of readyForEmail) {
       try {
-        // Skip if already at max steps
+        // Skip leads with terminal statuses
+        if (terminalStatuses.has(lead.status)) {
+          continue;
+        }
+
+        // If at max steps for initial sequence, transition to nurture
         const maxSteps = getMaxSteps(lead.tier);
         if (lead.currentSequenceStep >= maxSteps) {
+          await convex.mutation(api.leads.updateStatus, {
+            leadId: lead._id,
+            status: "nurture",
+            note: "Completed email sequence — moving to nurture",
+          });
           continue;
         }
 
@@ -222,11 +241,95 @@ export async function GET(request: Request) {
       }
     }
 
+    // ============================================
+    // STEP 5: SEND NURTURE EMAILS (Steps 5-7)
+    // ============================================
+    const nurtureMaxSteps = getNurtureMaxSteps(); // 8 (steps 0-7)
+    const remainingAfterInitial = await convex.query(api.warming.canSendEmail);
+
+    if (remainingAfterInitial) {
+      const nurtureLeads = await convex.query(api.leads.getNurtureLeads, {
+        limit: 50,
+      });
+
+      for (const lead of nurtureLeads) {
+        try {
+          // If past all nurture steps, transition to closed_lost
+          if (lead.currentSequenceStep >= nurtureMaxSteps) {
+            await convex.mutation(api.leads.updateStatus, {
+              leadId: lead._id,
+              status: "closed_lost",
+              note: "Completed nurture sequence — no engagement",
+            });
+            results.nurtureCompleted++;
+            continue;
+          }
+
+          // Check warming limit
+          const canStillSend = await convex.query(api.warming.canSendEmail);
+          if (!canStillSend) break;
+
+          const step = lead.currentSequenceStep;
+          const variant = lead.sequenceVariant || "A";
+
+          // Generate unsubscribe token
+          const unsubscribeToken = await convex.mutation(
+            api.unsubscribe.generateTokenForLead,
+            { leadId: lead._id }
+          );
+          const unsubscribeUrl = `${process.env.UNSUBSCRIBE_BASE_URL}/${unsubscribeToken}`;
+
+          const templateParams = {
+            contactName: lead.contactName,
+            companyName: lead.companyName,
+            personalizedOpener: lead.personalizedOpener || "",
+            unsubscribeUrl,
+            calendlyUrl: process.env.CALENDLY_BOOKING_URL || "https://calendly.com/risksure/demo",
+            estimatedSubbies: lead.estimatedSubbies,
+            state: lead.state,
+          };
+
+          const plainText = getPlainTextTemplate(lead.tier, step, variant, templateParams);
+          const subject = getSubject(lead.tier, step, variant, lead.companyName);
+
+          const result = await sendEmail({
+            to: lead.contactEmail,
+            subject,
+            text: plainText || undefined,
+            leadId: lead._id,
+            sequenceStep: step,
+            variant,
+            tier: lead.tier,
+          });
+
+          if (result.success && result.messageId) {
+            await convex.mutation(api.leads.markEmailSent, {
+              leadId: lead._id,
+              resendMessageId: result.messageId,
+              subject,
+              sequenceStep: step,
+              variant,
+            });
+
+            await convex.mutation(api.warming.recordEmailSent);
+            await convex.mutation(api.metrics.increment, { metric: "emailsSent" });
+
+            results.nurtureEmailsSent++;
+          } else {
+            results.errors.push(`Nurture email error for ${lead.contactEmail}: ${result.error}`);
+          }
+        } catch (error) {
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          results.errors.push(`Nurture error for ${lead.contactEmail}: ${errorMessage}`);
+        }
+      }
+    }
+
     // Send summary notification
-    if (results.emailsSent > 0 || results.enriched > 0) {
+    if (results.emailsSent > 0 || results.enriched > 0 || results.nurtureEmailsSent > 0) {
       await sendNotification(
         "Daily Pipeline Complete",
-        `Validated: ${results.validated}\nEnriched: ${results.enriched}\nEmails Sent: ${results.emailsSent}\nErrors: ${results.errors.length}`
+        `Validated: ${results.validated}\nEnriched: ${results.enriched}\nEmails Sent: ${results.emailsSent}\nNurture Emails: ${results.nurtureEmailsSent}\nNurture Completed: ${results.nurtureCompleted}\nErrors: ${results.errors.length}`
       );
     }
 

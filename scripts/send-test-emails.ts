@@ -43,7 +43,7 @@ const SAMPLE_DATA = {
 };
 
 const SENDER = {
-  name: process.env.SENDER_NAME || "Jason",
+  name: process.env.SENDER_NAME || "Jayson",
   title: process.env.SENDER_TITLE || "Founder",
   phone: process.env.SENDER_PHONE || "0412 345 678",
 };
@@ -361,7 +361,7 @@ async function main() {
         const testSubject = `[TEST ${email.label}] ${email.subject}`;
 
         const { error } = await resend.emails.send({
-          from: "Jason <jason@risksure.ai>",
+          from: "Jayson <jayson@risksure.ai>",
           to: recipient,
           subject: testSubject,
           text: email.body,

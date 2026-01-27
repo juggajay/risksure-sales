@@ -150,6 +150,8 @@ export async function POST(request: Request) {
 
         await convex.mutation(api.leads.markBounced, { leadId });
         await convex.mutation(api.metrics.increment, { metric: "emailsBounced" });
+        // Track bounce in warming system for dynamic limit adjustment
+        await convex.mutation(api.warming.recordBounce);
         break;
 
       case "email.complained":
@@ -168,6 +170,8 @@ export async function POST(request: Request) {
           note: "Marked as spam",
         });
         await convex.mutation(api.metrics.increment, { metric: "unsubscribes" });
+        // Track complaint in warming system for auto-pause
+        await convex.mutation(api.warming.recordComplaint);
         break;
     }
 

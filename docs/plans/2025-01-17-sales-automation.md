@@ -2099,7 +2099,7 @@ export interface SendEmailResult {
 export async function sendEmail(params: SendEmailParams): Promise<SendEmailResult> {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Jason <jason@risksure.ai>",
+      from: "Jayson <jayson@risksure.ai>",
       to: params.to,
       subject: params.subject,
       html: params.html,
@@ -2499,7 +2499,7 @@ export function velocityStep0A(params: TemplateParams): string {
     <p>Most builders I talk to spend 5-10 hours a week chasing Certificates of Currency from subbies. And even then, there are usually gaps.</p>
     <p>We built an AI that reads certificates in 30 seconds and flags compliance issues automatically. No more spreadsheets, no more chasing.</p>
     <p>Worth a quick look?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2512,7 +2512,7 @@ export function velocityStep0B(params: TemplateParams): string {
     <p>We built RiskSure to fix that—AI verifies every certificate in 30 seconds, creates an audit trail, and alerts you to gaps before they become problems.</p>
     <p>Best part? It's free for your subbies, so they actually use it (unlike Cm3).</p>
     <p>Got 15 minutes this week?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2526,7 +2526,7 @@ export function velocityStep1A(params: TemplateParams): string {
     <p>Following up on my note about certificate compliance.</p>
     <p>Quick question: How are you currently tracking subbie insurance? Spreadsheets? Cm3? Someone's inbox?</p>
     <p>Just curious what the process looks like at ${params.companyName}.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2537,7 +2537,7 @@ export function velocityStep1B(params: TemplateParams): string {
     <p>Circling back—did my last email about certificate verification land?</p>
     <p>One thing I should mention: if you're using Cm3, our customers typically see 2-3x better adoption because subbies don't have to pay anything.</p>
     <p>Happy to show you how it works in 15 minutes.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2552,7 +2552,7 @@ export function velocityStep2A(params: TemplateParams): string {
     <p>If you're manually verifying certificates for 50+ subbies, that's probably 10-15 hours/week of admin time. At $50/hour, that's $25,000-$40,000/year.</p>
     <p>RiskSure automates all of it for $349/month. Plus you get an audit trail that actually impresses WorkSafe.</p>
     <p><a href="${params.calendlyUrl}">Book 15 mins here</a> if you want to see how it works.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2565,7 +2565,7 @@ export function velocityStep2B(params: TemplateParams): string {
     <p>RiskSure gives you a defensible audit trail: every certificate verified by AI, every check timestamped, every gap flagged.</p>
     <p>Worth 15 minutes to see how it works?</p>
     <p><a href="${params.calendlyUrl}">Grab a time here</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2580,7 +2580,7 @@ export function velocityStep3A(params: TemplateParams): string {
     <p>If subbie compliance isn't a pain point for ${params.companyName} right now, totally understand. I'll close your file.</p>
     <p>But if you're ever drowning in certificate chasing or prepping for an audit, the door's always open: <a href="${params.calendlyUrl}">risksure.ai/demo</a></p>
     <p>Good luck with the projects.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2592,7 +2592,7 @@ export function velocityStep3B(params: TemplateParams): string {
     <p>If timing isn't right, no worries. But before I go—we're running a founder's special: 50% off for 6 months for early adopters.</p>
     <p>Code is FOUNDER50 if you ever want to try it out.</p>
     <p>All the best with ${params.companyName}.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2717,7 +2717,7 @@ export function complianceStep0A(params: TemplateParams): string {
     <p>We built RiskSure for exactly this: AI that verifies certificates in 30 seconds, tracks expiries across your entire portfolio, and sends you a morning brief on who's compliant and who's not.</p>
     <p>Green light, red light. No spreadsheets.</p>
     <p>Worth 20 minutes to see how it works for multi-project operations?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2731,7 +2731,7 @@ export function complianceStep0B(params: TemplateParams): string {
     <p>RiskSure is free for subbies—literally $0 forever. They get a magic link, upload in 60 seconds, done. No account creation, no fees.</p>
     <p>That's how we get 90%+ adoption.</p>
     <p>Happy to show you how it works.</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2742,7 +2742,7 @@ export function complianceStep1A(params: TemplateParams): string {
     <p>Following up on multi-project compliance.</p>
     <p>One thing I forgot to mention: we integrate with Procore. Bi-directional sync—subbie data flows both ways, no double entry.</p>
     <p>Worth a quick chat?</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2752,7 +2752,7 @@ export function complianceStep1B(params: TemplateParams): string {
     <p>Hi ${params.contactName},</p>
     <p>Circling back on the subbie adoption question.</p>
     <p>If Cm3 is working great for you, ignore me. But if adoption is a headache, might be worth 15 minutes to see how we solved it.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2769,7 +2769,7 @@ export function complianceStep2A(params: TemplateParams): string {
     </ul>
     <p>It's like having a compliance officer who never sleeps.</p>
     <p><a href="${params.calendlyUrl}">Grab 20 mins here</a> if you want to see it in action.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2781,7 +2781,7 @@ export function complianceStep2B(params: TemplateParams): string {
     <p>"${params.companyName} Compliance Brief: 3 subbies with expiring WorkCover this week. 1 stop-work risk at [Project Name]."</p>
     <p>That's RiskSure. You know exactly what needs attention before your feet hit the site.</p>
     <p><a href="${params.calendlyUrl}">Quick demo?</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2793,7 +2793,7 @@ export function complianceStep3A(params: TemplateParams): string {
     <p>If you're using Procore for project management, RiskSure syncs directly. Subbie compliance data flows both ways—no copy-pasting, no double entry.</p>
     <p>Your project managers see compliance status right in Procore.</p>
     <p>Worth discussing?</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2804,7 +2804,7 @@ export function complianceStep3B(params: TemplateParams): string {
     <p>One more thing on the Procore front:</p>
     <p>We built bi-directional sync specifically for companies your size. Pull subbies from Procore, push compliance status back. Your PMs see green/red lights without leaving their workflow.</p>
     <p><a href="${params.calendlyUrl}">15 mins to see it?</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2816,7 +2816,7 @@ export function complianceStep4A(params: TemplateParams): string {
     <p>If it's not a priority for ${params.companyName} right now, I get it. But the offer stands: 14-day free trial, full Compliance tier features, no credit card.</p>
     <p><a href="${params.calendlyUrl}">Calendar link here</a> if timing ever works out.</p>
     <p>All the best.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2827,7 +2827,7 @@ export function complianceStep4B(params: TemplateParams): string {
     <p>Closing the loop—last note from me.</p>
     <p>If you're ever prepping for a WorkSafe audit or drowning in subbie compliance, we're here. Founder's special still applies: FOUNDER50 for 50% off.</p>
     <p>Good luck with the projects.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2951,7 +2951,7 @@ export function businessStep0A(params: TemplateParams): string {
     <p>One uninsured subbie incident across your portfolio could mean millions in exposure. And with industrial manslaughter laws, it's not just the company at risk.</p>
     <p>We built RiskSure for enterprise operations: portfolio-wide compliance visibility, executive dashboards, and an audit trail that stands up to scrutiny.</p>
     <p>Worth a conversation with your leadership team?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2964,7 +2964,7 @@ export function businessStep0B(params: TemplateParams): string {
     <p>Most enterprise builders we talk to have the data somewhere—spreadsheets, Cm3, email chains—but no single source of truth.</p>
     <p>RiskSure gives you a portfolio-wide dashboard: every project, every subbie, every certificate. Green light, red light, drill down as needed.</p>
     <p>Is this on your radar?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2975,7 +2975,7 @@ export function businessStep1A(params: TemplateParams): string {
     <p>Following up on portfolio compliance visibility.</p>
     <p>One thing I should mention: we offer dedicated onboarding for enterprise accounts. Your team won't be left figuring things out alone.</p>
     <p>Worth a quick call?</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -2986,7 +2986,7 @@ export function businessStep1B(params: TemplateParams): string {
     <p>Circling back on executive dashboards.</p>
     <p>Imagine your Monday morning: CEO asks "where are we on subbie compliance?" You pull up a single dashboard, filter by project, drill down to problem subbies.</p>
     <p>That's what we built.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3004,7 +3004,7 @@ export function businessStep2A(params: TemplateParams): string {
     </ul>
     <p>If WorkSafe walks in tomorrow, you hand them a system, not a scramble.</p>
     <p><a href="${params.calendlyUrl}">Worth discussing?</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3017,7 +3017,7 @@ export function businessStep2B(params: TemplateParams): string {
     <p>RiskSure gives you that paper trail. Every certificate, every check, timestamped and defensible.</p>
     <p>This is the kind of conversation worth having before an incident, not after.</p>
     <p><a href="${params.calendlyUrl}">Got 30 minutes?</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3030,7 +3030,7 @@ export function businessStep3A(params: TemplateParams): string {
     <p><strong>Manual cost: ~$60,000/year in admin time alone.</strong></p>
     <p>RiskSure Business tier: $14,990/year. That's 75% savings, plus the audit trail, plus the peace of mind.</p>
     <p>Happy to walk through the ROI for ${params.companyName} specifically.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3046,7 +3046,7 @@ export function businessStep3B(params: TemplateParams): string {
     </ul>
     <p>RiskSure does it in 30 seconds per certificate. The math speaks for itself.</p>
     <p>Worth a CFO-level conversation?</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3059,7 +3059,7 @@ export function businessStep4A(params: TemplateParams): string {
     <p>But if you're ever evaluating compliance systems—or prepping for a major audit—I'd welcome the conversation.</p>
     <p><a href="${params.calendlyUrl}">Door's always open.</a></p>
     <p>All the best.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -3071,7 +3071,7 @@ export function businessStep4B(params: TemplateParams): string {
     <p>If the timing's not right, no problem. But one thing to file away: we offer quarterly business reviews for enterprise accounts—dedicated check-ins to optimize your compliance process.</p>
     <p>That's the kind of partnership we're building.</p>
     <p>Whenever you're ready.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -4125,7 +4125,7 @@ export default function UnsubscribePage() {
             </p>
             <p style={{ marginTop: 24, fontSize: 14, color: "#999" }}>
               Changed your mind?{" "}
-              <a href="mailto:jason@risksure.ai" style={{ color: "#2563eb" }}>
+              <a href="mailto:jayson@risksure.ai" style={{ color: "#2563eb" }}>
                 Contact us
               </a>
             </p>

@@ -29,7 +29,7 @@ const templateVars = {
   personalizedOpener: "Saw Ryox just landed the fit-out for the new medical centre in Penrith - nice win.",
   estimatedSubbies: "45",
   state: "NSW",
-  senderName: "Jason",
+  senderName: "Jayson",
   senderTitle: "Founder",
   senderPhone: "0412 345 678",
   calendlyUrl: "https://calendly.com/jaysonryan2107",
@@ -59,7 +59,7 @@ async function sendTestEmail(
 ): Promise<void> {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Jason <jason@risksure.ai>",
+      from: "Jayson <jayson@risksure.ai>",
       to,
       subject,
       text: body,

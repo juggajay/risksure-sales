@@ -57,16 +57,32 @@ export const getReadyForEmail = query({
   args: { limit: v.number() },
   handler: async (ctx, args) => {
     const now = Date.now();
-    return await ctx.db
-      .query("leads")
-      .withIndex("by_status", (q) => q.eq("status", "ready"))
-      .filter((q) =>
-        q.or(
-          q.eq(q.field("nextEmailAt"), undefined),
-          q.lte(q.field("nextEmailAt"), now)
+    // Query all statuses that are eligible for email sends:
+    // - "ready": initial outreach (step 0)
+    // - "contacted": sent at least one email, due for follow-up
+    // - "opened": opened an email, due for follow-up
+    // - "clicked": clicked a link, due for follow-up
+    const eligibleStatuses = ["ready", "contacted", "opened", "clicked"] as const;
+    const results = [];
+
+    for (const status of eligibleStatuses) {
+      const leads = await ctx.db
+        .query("leads")
+        .withIndex("by_status", (q) => q.eq("status", status))
+        .filter((q) =>
+          q.or(
+            q.eq(q.field("nextEmailAt"), undefined),
+            q.lte(q.field("nextEmailAt"), now)
+          )
         )
-      )
-      .take(args.limit);
+        .take(args.limit);
+      results.push(...leads);
+    }
+
+    // Return up to the requested limit, sorted by nextEmailAt (oldest first)
+    return results
+      .sort((a, b) => (a.nextEmailAt ?? 0) - (b.nextEmailAt ?? 0))
+      .slice(0, args.limit);
   },
 });
 
@@ -329,13 +345,26 @@ export const markEmailSent = mutation({
     const lead = await ctx.db.get(args.leadId);
     if (!lead) return;
 
-    // Calculate next email time based on sequence
-    const delayDays = [0, 3, 7, 14][args.sequenceStep + 1] || 21;
+    // Advance currentSequenceStep to the NEXT step after the one just sent
+    const nextStep = args.sequenceStep + 1;
+
+    // Delay days for each step (matches sequenceConfig in templates/index.ts)
+    const stepDelays: Record<number, number> = {
+      0: 0, 1: 4, 2: 9, 3: 15, 4: 22,
+      5: 45, 6: 60, 7: 90, // nurture steps
+    };
+    const delayDays = stepDelays[nextStep] !== undefined
+      ? stepDelays[nextStep] - (stepDelays[args.sequenceStep] ?? 0)
+      : 21;
     const nextEmailAt = Date.now() + (delayDays * 24 * 60 * 60 * 1000);
 
+    // Keep "nurture" status for leads in nurture sequence (steps 5+),
+    // otherwise set to "contacted"
+    const newStatus = lead.status === "nurture" ? "nurture" : "contacted";
+
     await ctx.db.patch(args.leadId, {
-      status: "contacted",
-      currentSequenceStep: args.sequenceStep,
+      status: newStatus,
+      currentSequenceStep: nextStep,
       sequenceVariant: args.variant,
       lastEmailSentAt: Date.now(),
       nextEmailAt,
@@ -445,5 +474,26 @@ export const setDemoScheduled = mutation({
       description: `Demo scheduled for ${new Date(args.scheduledAt).toLocaleDateString()}`,
       createdAt: Date.now(),
     });
+  },
+});
+
+// ============================================
+// NURTURE QUERIES
+// ============================================
+
+export const getNurtureLeads = query({
+  args: { limit: v.number() },
+  handler: async (ctx, args) => {
+    const now = Date.now();
+    return await ctx.db
+      .query("leads")
+      .withIndex("by_status", (q) => q.eq("status", "nurture"))
+      .filter((q) =>
+        q.or(
+          q.eq(q.field("nextEmailAt"), undefined),
+          q.lte(q.field("nextEmailAt"), now)
+        )
+      )
+      .take(args.limit);
   },
 });

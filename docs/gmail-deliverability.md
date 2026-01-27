@@ -24,7 +24,7 @@ One uninsured subbie incident across your portfolio could mean millions in expos
 
 Worth a conversation with your leadership team?
 
-Jason
+Jayson
 RiskSure.AI
 
 ---
@@ -82,7 +82,7 @@ That's the gap we built RiskSure to close. Not another system to manage, but a s
 
 Is this a problem you're dealing with?
 
-Jason
+Jayson
 RiskSure.AI
 
 ---

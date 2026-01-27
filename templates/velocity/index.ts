@@ -48,7 +48,7 @@ export function velocityStep0A(params: TemplateParams): string {
     <p>Most builders I talk to spend 5-10 hours a week chasing Certificates of Currency from subbies. And even then, there are usually gaps.</p>
     <p>We built an AI that reads certificates in 30 seconds and flags compliance issues automatically. No more spreadsheets, no more chasing.</p>
     <p>Worth a quick look?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -61,7 +61,7 @@ export function velocityStep0B(params: TemplateParams): string {
     <p>We built RiskSure to fix that—AI verifies every certificate in 30 seconds, creates an audit trail, and alerts you to gaps before they become problems.</p>
     <p>Best part? It's free for your subbies, so they actually use it (unlike Cm3).</p>
     <p>Got 15 minutes this week?</p>
-    <p>Jason<br/>RiskSure.AI</p>
+    <p>Jayson<br/>RiskSure.AI</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -75,7 +75,7 @@ export function velocityStep1A(params: TemplateParams): string {
     <p>Following up on my note about certificate compliance.</p>
     <p>Quick question: How are you currently tracking subbie insurance? Spreadsheets? Cm3? Someone's inbox?</p>
     <p>Just curious what the process looks like at ${params.companyName}.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -86,7 +86,7 @@ export function velocityStep1B(params: TemplateParams): string {
     <p>Circling back—did my last email about certificate verification land?</p>
     <p>One thing I should mention: if you're using Cm3, our customers typically see 2-3x better adoption because subbies don't have to pay anything.</p>
     <p>Happy to show you how it works in 15 minutes.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -101,7 +101,7 @@ export function velocityStep2A(params: TemplateParams): string {
     <p>If you're manually verifying certificates for 50+ subbies, that's probably 10-15 hours/week of admin time. At $50/hour, that's $25,000-$40,000/year.</p>
     <p>RiskSure automates all of it for $349/month. Plus you get an audit trail that actually impresses WorkSafe.</p>
     <p><a href="${params.calendlyUrl}">Book 15 mins here</a> if you want to see how it works.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -114,7 +114,7 @@ export function velocityStep2B(params: TemplateParams): string {
     <p>RiskSure gives you a defensible audit trail: every certificate verified by AI, every check timestamped, every gap flagged.</p>
     <p>Worth 15 minutes to see how it works?</p>
     <p><a href="${params.calendlyUrl}">Grab a time here</a></p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -129,7 +129,7 @@ export function velocityStep3A(params: TemplateParams): string {
     <p>If subbie compliance isn't a pain point for ${params.companyName} right now, totally understand. I'll close your file.</p>
     <p>But if you're ever drowning in certificate chasing or prepping for an audit, the door's always open: <a href="${params.calendlyUrl}">risksure.ai/demo</a></p>
     <p>Good luck with the projects.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }
@@ -141,7 +141,7 @@ export function velocityStep3B(params: TemplateParams): string {
     <p>If timing isn't right, no worries. But before I go—we're running a founder's special: 50% off for 6 months for early adopters.</p>
     <p>Code is FOUNDER50 if you ever want to try it out.</p>
     <p>All the best with ${params.companyName}.</p>
-    <p>Jason</p>
+    <p>Jayson</p>
   `;
   return wrapEmail({ content, unsubscribeUrl: params.unsubscribeUrl });
 }

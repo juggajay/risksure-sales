@@ -17,7 +17,7 @@ All templates support these variables:
 | `{{personalizedOpener}}` | AI-generated opener from enrichment (1-2 sentences) | "Saw Built just won the Westfield project in Parramatta..." |
 | `{{estimatedSubbies}}` | Estimated subcontractor count from enrichment | "200" |
 | `{{state}}` | Australian state | "NSW" |
-| `{{senderName}}` | Sender's first name | "Jason" |
+| `{{senderName}}` | Sender's first name | "Jayson" |
 | `{{senderTitle}}` | Sender's title | "Founder" |
 | `{{senderPhone}}` | Sender's phone | "0412 345 678" |
 | `{{calendlyUrl}}` | Demo booking link | "https://calendly.com/risksure/demo" |

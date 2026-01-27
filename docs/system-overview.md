@@ -224,7 +224,7 @@ One client cut their compliance admin by 10 hours a week.
 
 Worth a quick chat about how this could work for your projects?
 
-Jason
+Jayson
 Head of Growth | RiskSure.AI
 0412 345 678
 
@@ -234,7 +234,7 @@ If this isn't relevant for Built Pty Ltd, just let me know.`
 ### Step 7: Email Sending (Resend)
 
 Emails are sent via Resend with:
-- Domain-authenticated sending (jason@risksure.ai)
+- Domain-authenticated sending (jayson@risksure.ai)
 - SPF/DKIM/DMARC configured
 - Tags for tracking (lead_id, sequence_step, variant, tier)
 - Plain text format (for Gmail Primary inbox placement)
@@ -443,7 +443,7 @@ The system complies with Australian spam laws:
 1. **Consent**: Uses "inferred consent" for B2B - email addresses conspicuously published on company websites for business purposes
 
 2. **Identification**: Every email clearly identifies:
-   - Sender name (Jason)
+   - Sender name (Jayson)
    - Company (RiskSure.AI)
    - Contact method (phone number)
 

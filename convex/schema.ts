@@ -210,6 +210,12 @@ export default defineSchema({
     lastIncrementDate: v.string(),
     emailsSentToday: v.number(),
     warmingStartDate: v.string(),
+    // Bounce & complaint tracking
+    bouncesToday: v.optional(v.number()),
+    complaintsToday: v.optional(v.number()),
+    // Auto-pause
+    pausedAt: v.optional(v.number()),
+    pauseReason: v.optional(v.string()),
   }),
 
   // ============================================

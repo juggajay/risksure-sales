@@ -27,6 +27,18 @@ const defaultTemplates = {
       A: "Closing the loop",
       B: "Last note from me",
     },
+    step5: {
+      A: "New feature: automated expiry alerts",
+      B: "Product update from RiskSure",
+    },
+    step6: {
+      A: "Still relevant for {{companyName}}?",
+      B: "Quick check-in",
+    },
+    step7: {
+      A: "Final note from RiskSure",
+      B: "One last thought on compliance",
+    },
   },
   bodies: {
     step0: `{{personalizedOpener}}
@@ -151,6 +163,45 @@ All the best with the projects.
 
 {{senderName}}
 {{senderPhone}}`,
+
+    step5: `{{contactName}},
+
+It's been a while since we last connected. Wanted to share a quick update.
+
+We've just launched automated expiry alerts — our system now monitors every certificate in real time and notifies both you and the subbie before anything lapses. No more manual tracking or surprise gaps.
+
+A few {{state}} builders have told us this alone saves them 5+ hours a week.
+
+If things have changed on your end and compliance is back on the radar: {{calendlyUrl}}
+
+{{senderName}}
+{{senderPhone}}`,
+
+    step6: `{{contactName}},
+
+Just a quick check-in from RiskSure.
+
+Is subbie insurance compliance still a pain point for {{companyName}}? If you've solved it another way, genuinely curious to hear what's working.
+
+If it's still on the back burner, no pressure. But if a 15-minute look would be useful, I'm here: {{calendlyUrl}}
+
+Either way, hope the projects are going well.
+
+{{senderName}}`,
+
+    step7: `{{contactName}},
+
+This will be my last note.
+
+If {{companyName}} ever needs a better way to handle subbie insurance verification — whether it's before an audit, after a near-miss, or just to free up admin time — we're here.
+
+We've helped dozens of Australian builders go from spreadsheets to a fully automated compliance system. The door's always open: {{calendlyUrl}}
+
+All the best.
+
+{{senderName}}
+{{senderTitle}} | RiskSure.AI
+{{senderPhone}}`,
   },
   timing: {
     step0: 0,
@@ -158,6 +209,9 @@ All the best with the projects.
     step2: 9,
     step3: 15,
     step4: 22,
+    step5: 45,
+    step6: 60,
+    step7: 90,
   },
 };
 
@@ -246,8 +300,8 @@ export const initialize = mutation({
       return { success: false, message: "Templates already initialized" };
     }
 
-    // Create all 5 steps
-    for (let step = 0; step <= 4; step++) {
+    // Create all 8 steps (0-4 initial, 5-7 nurture)
+    for (let step = 0; step <= 7; step++) {
       const stepKey = `step${step}` as keyof typeof defaultTemplates.subjects;
 
       await ctx.db.insert("emailTemplates", {

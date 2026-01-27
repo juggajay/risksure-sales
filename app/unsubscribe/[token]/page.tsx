@@ -141,7 +141,7 @@ export default function UnsubscribePage() {
             </p>
             <p style={{ marginTop: 24, fontSize: 14, color: "#999" }}>
               Changed your mind?{" "}
-              <a href="mailto:jason@risksure.ai" style={{ color: "#2563eb" }}>
+              <a href="mailto:jayson@risksure.ai" style={{ color: "#2563eb" }}>
                 Contact us
               </a>
             </p>

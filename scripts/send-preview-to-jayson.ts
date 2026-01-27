@@ -11,9 +11,9 @@ const resend = new Resend(process.env.RESEND_API_KEY!);
 
 // Jayson's email addresses for preview
 const PREVIEW_EMAILS = [
-  "jaysonryan21@hotmail.com",
   "jaysonryan2107@gmail.com",
-  "jayson@ryoxcarpentry.com",
+  "jaysonryan2107@gmail.com",
+  "jaysonryan2107@gmail.com",
 ];
 
 // Real Australian construction companies
@@ -46,12 +46,12 @@ async function generateEmail(enrichment: any, companyName: string) {
   const templatesData = await convex.query(api.templates.getAll);
   const templates = templatesData.templates;
 
-  // Use Step 0 (Initial Outreach)
+  // Use Step 1 (Follow-up with video link)
   const variant = Math.random() > 0.5 ? "A" : "B";
   const subject = variant === "A"
-    ? templates.subjects.step0.A
-    : templates.subjects.step0.B;
-  const body = templates.bodies.step0;
+    ? templates.subjects.step1.A
+    : templates.subjects.step1.B;
+  const body = templates.bodies.step1;
 
   // Replace template variables
   const replacements: Record<string, string> = {
@@ -61,7 +61,7 @@ async function generateEmail(enrichment: any, companyName: string) {
     "{{estimatedSubbies}}": String(enrichment.estimatedSubbies || 50),
     "{{state}}": enrichment.state || "Australia",
     "{{calendlyUrl}}": "https://calendly.com/risksure/demo",
-    "{{senderName}}": "Jason",
+    "{{senderName}}": "Jayson",
     "{{senderTitle}}": "Founder",
     "{{senderPhone}}": "0412 345 678",
     "{{demoVideoUrl}}": "https://risksure.ai/demo",
@@ -87,7 +87,7 @@ async function sendEmail(to: string, subject: string, body: string, companyName:
   `;
 
   const result = await resend.emails.send({
-    from: "Jason <jason@risksure.ai>",
+    from: "Jayson <jayson@risksure.ai>",
     to: [to],
     subject: `[PREVIEW - ${companyName}] ${subject}`,
     html: htmlBody,
