@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function StatusBadge({ status }: { status: string }) {
   const statusConfig: Record<string, { bg: string; text: string; label: string }> = {
@@ -65,8 +65,42 @@ export default function LeadsPage() {
   const [filter, setFilter] = useState<string>("all");
   const [tierFilter, setTierFilter] = useState<string>("all");
   const [search, setSearch] = useState<string>("");
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<{ success: boolean; message: string } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const allLeads = useQuery(api.leads.getAll);
+
+  const handleImportCSV = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setImporting(true);
+    setImportResult(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/leads/import", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setImportResult({ success: true, message: `Imported ${data.imported} leads` });
+      } else {
+        setImportResult({ success: false, message: data.error || "Import failed" });
+      }
+    } catch {
+      setImportResult({ success: false, message: "Network error — could not reach server" });
+    } finally {
+      setImporting(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   // Filter leads
   const filteredLeads = allLeads?.filter((lead) => {
@@ -113,14 +147,41 @@ export default function LeadsPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="px-4 py-2.5 bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-lg text-sm font-medium hover:bg-[var(--bg-hover)] transition-colors border border-[var(--border-subtle)]">
-            Import CSV
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            onChange={handleImportCSV}
+            className="hidden"
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={importing}
+            className="px-4 py-2.5 bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-lg text-sm font-medium hover:bg-[var(--bg-hover)] transition-colors border border-[var(--border-subtle)] disabled:opacity-50"
+          >
+            {importing ? "Importing..." : "Import CSV"}
           </button>
           <button className="px-4 py-2.5 bg-[var(--accent-primary)] text-[var(--bg-primary)] rounded-lg text-sm font-medium hover:bg-[var(--accent-primary-hover)] transition-colors shadow-lg shadow-[var(--accent-primary)]/20">
             Add Lead
           </button>
         </div>
       </div>
+
+      {/* Import Result */}
+      {importResult && (
+        <div
+          className={`px-4 py-3 rounded-lg text-sm font-medium flex items-center justify-between ${
+            importResult.success
+              ? "bg-[var(--success-muted)] text-[var(--success)]"
+              : "bg-[var(--error-muted)] text-[var(--error)]"
+          }`}
+        >
+          <span>{importResult.message}</span>
+          <button onClick={() => setImportResult(null)} className="ml-4 opacity-70 hover:opacity-100">
+            &times;
+          </button>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="flex items-center gap-4 flex-wrap">
