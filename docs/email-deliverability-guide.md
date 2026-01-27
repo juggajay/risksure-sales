@@ -339,7 +339,7 @@ html<!DOCTYPE html>
 
 <p>At [Your Company], we automate the specific checklists required by the 2025 code. We recently saved [Competitor] about 10 hours a week on admin.</p>
 
-<p>Are you open to a quick 2-minute video on how it works?</p>
+<p>Are you open to a quick 45-second video on how it works?</p>
 
 <p>Best,</p>
 

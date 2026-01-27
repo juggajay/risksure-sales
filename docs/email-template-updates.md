@@ -121,7 +121,7 @@ No chasing. No spreadsheets. No manual checking.
 
 Already using Procore? We sync directly - your subbie compliance status shows up right in your project.
 
-Here's a 2-minute video showing how it works: {{demoVideoUrl}}
+Here's a 45-second video showing how it works: {{demoVideoUrl}}
 
 Or grab a time for a live walkthrough: {{calendlyUrl}}
 
@@ -317,7 +317,7 @@ No chasing. No spreadsheets. No manual checking.
 
 Already using Procore? We sync directly - your subbie compliance status shows up right in your project.
 
-Here's a 2-minute video showing how it works: {{demoVideoUrl}}
+Here's a 45-second video showing how it works: {{demoVideoUrl}}
 
 Or grab a time for a live walkthrough: {{calendlyUrl}}
 
@@ -430,7 +430,7 @@ Add support for `{{demoVideoUrl}}` variable. This should be configurable in sett
 
 **Default value:** `https://www.loom.com/share/risksure-demo` (placeholder - replace with actual video)
 
-**Action Required:** Record a 2-minute Loom video showing:
+**Action Required:** 45-second demo video showing:
 1. Subbie receives portal link
 2. Subbie uploads COC (60 seconds)
 3. AI verification happens (30 seconds)
@@ -516,7 +516,7 @@ Before starting outreach:
 - [ ] Update `convex/templates.ts` with new templates
 - [ ] Reset templates in database (run migration)
 - [ ] **Configure FOUNDER50 promo code in Stripe (50% off, 6 months)**
-- [ ] Record 2-minute demo video and update `{{demoVideoUrl}}`
+- [x] Record 45-second demo video and update `{{demoVideoUrl}}` → https://risksure.ai/demo
 - [ ] Set up Calendly link and update `{{calendlyUrl}}`
 - [ ] Configure sender details (`{{senderName}}`, `{{senderTitle}}`, `{{senderPhone}}`)
 - [ ] Verify email domain is warmed (check current day count)
