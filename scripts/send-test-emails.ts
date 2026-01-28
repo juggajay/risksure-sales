@@ -76,7 +76,9 @@ const templates = {
     },
   },
   bodies: {
-    step0: `{{personalizedOpener}}
+    step0: `Hi {{contactName}},
+
+{{personalizedOpener}}
 
 When a new subbie comes on, someone on your team gets their COC, opens the PDF, checks the coverage and expiry, matches it to your requirements, logs it somewhere, and follows up if something's off.
 
@@ -98,7 +100,7 @@ Happy to show you how it works if you're interested: {{calendlyUrl}}
 
 If this isn't relevant for {{companyName}}, just let me know.`,
 
-    step1: `{{contactName}},
+    step1: `Hi {{contactName}},
 
 Following up on my last note.
 
@@ -116,7 +118,7 @@ Or grab a time for a live walkthrough: {{calendlyUrl}}
 
 If this isn't relevant, just reply and I'll stop following up.`,
 
-    step2_velocity: `{{contactName}},
+    step2_velocity: `Hi {{contactName}},
 
 Two angles to consider:
 
@@ -131,7 +133,7 @@ Worth a 15-minute look? {{calendlyUrl}}
 {{senderName}}
 {{senderPhone}}`,
 
-    step2_compliance: `{{contactName}},
+    step2_compliance: `Hi {{contactName}},
 
 Two angles to consider:
 
@@ -151,7 +153,7 @@ Worth a look? {{calendlyUrl}}
 {{senderName}}
 {{senderPhone}}`,
 
-    step2_business: `{{contactName}},
+    step2_business: `Hi {{contactName}},
 
 At {{companyName}}'s scale, you've got thousands of certificates across your portfolio. That's either a full-time job for someone, or gaps are forming.
 
@@ -168,7 +170,7 @@ If you'd like to see how this works at enterprise scale: {{calendlyUrl}}
 {{senderName}}
 {{senderPhone}}`,
 
-    step3: `{{contactName}},
+    step3: `Hi {{contactName}},
 
 One more thought and I'll leave you alone.
 
@@ -186,7 +188,7 @@ Either way, appreciate your time.
 {{senderTitle}} | RiskSure.AI
 {{senderPhone}}`,
 
-    step4: `{{contactName}},
+    step4: `Hi {{contactName}},
 
 I've reached out a few times about how {{companyName}} handles subbie insurance compliance - haven't heard back, so I'll assume the timing isn't right.
 

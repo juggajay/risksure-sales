@@ -137,24 +137,26 @@ Write a personalized email opener for cold outreach to:
 
 Contact: ${lead.contactName}${lead.contactTitle ? `, ${lead.contactTitle}` : ""}
 Company: ${lead.companyName}
+State: ${lead.state || "Unknown"}
 
 Research findings:
 ${JSON.stringify(research, null, 2)}
 
-Product: RiskSure.AI - automates Certificate of Currency verification for Australian construction companies.
-- AI verifies insurance certificates in 30 seconds (not 3-5 days of chasing)
-- FREE for subcontractors (unlike Cm3 which charges $400-$3,000/year)
-- Audit-ready compliance trail for WorkSafe
+CRITICAL RULES:
+- ONLY reference facts that appear in the research findings above (website content or search results).
+- DO NOT invent, assume, or fabricate any projects, wins, news, or events.
+- DO NOT flatter, compliment, or suck up. No "speaks volumes about your values", no "impressive growth", no "nice win". Keep it matter-of-fact.
+- The opener should simply show you understand their business and connect it to the problem of managing subcontractor compliance.
+- If the research contains specific details (project types, locations, scale), use those to frame the compliance challenge.
+- If the research has NO specific details, fall back to a straightforward opener about their sector and scale. Examples:
+  - "Running ${research.estimatedSubcontractors || "a team of"} subbies across ${lead.state || "multiple"} projects means a lot of certificates to keep on top of."
+  - "Managing subcontractor compliance across multiple projects is one of those jobs that never gets easier at scale."
+- NEVER start with something like "Saw you just won..." or "Noticed your new project..." unless that information is explicitly in the research findings.
 
-Value prop for ${tier} tier: ${tierValueProps[tier]}
-
-Write ONLY a 1-2 sentence opener that:
-1. References something specific about their company (project, growth, location)
-2. Connects to a compliance or subcontractor management pain point
-3. Feels personal and relevant - like you actually researched them
-
-Do NOT mention RiskSure or the product yet. Just the hook.
-Keep it under 50 words. No greeting, no sign-off.
+Write ONLY 1-2 sentences. Be direct and matter-of-fact — like a peer, not a salesperson.
+Do NOT mention RiskSure or the product. No greeting, no sign-off.
+Do NOT start with the contact's name — the email template already has "Hi {{contactName}}," before this opener.
+Keep it under 40 words.
 `,
       `{ "opener": "string" }`
     );

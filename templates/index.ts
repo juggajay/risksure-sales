@@ -63,7 +63,9 @@ const subjects = {
 // ============================================
 
 const bodies = {
-  step0: `{{personalizedOpener}}
+  step0: `Hi {{contactName}},
+
+{{personalizedOpener}}
 
 When a new subbie comes on, someone on your team gets their COC, opens the PDF, checks the coverage and expiry, matches it to your requirements, logs it somewhere, and follows up if something's off.
 
@@ -85,7 +87,7 @@ Happy to show you how it works if you're interested: {{calendlyUrl}}
 
 If this isn't relevant for {{companyName}}, just let me know.`,
 
-  step1: `{{contactName}},
+  step1: `Hi {{contactName}},
 
 Following up on my last note.
 
@@ -104,7 +106,7 @@ Or grab a time for a live walkthrough: {{calendlyUrl}}
 If this isn't relevant, just reply and I'll stop following up.`,
 
   step2: {
-    velocity: `{{contactName}},
+    velocity: `Hi {{contactName}},
 
 Two angles to consider:
 
@@ -119,7 +121,7 @@ Worth a 15-minute look? {{calendlyUrl}}
 {{senderName}}
 {{senderPhone}}`,
 
-    compliance: `{{contactName}},
+    compliance: `Hi {{contactName}},
 
 Two angles to consider:
 
@@ -139,7 +141,7 @@ Worth a look? {{calendlyUrl}}
 {{senderName}}
 {{senderPhone}}`,
 
-    business: `{{contactName}},
+    business: `Hi {{contactName}},
 
 At {{companyName}}'s scale, you've got thousands of certificates across your portfolio. That's either a full-time job for someone, or gaps are forming.
 
@@ -157,7 +159,7 @@ If you'd like to see how this works at enterprise scale: {{calendlyUrl}}
 {{senderPhone}}`,
   },
 
-  step3: `{{contactName}},
+  step3: `Hi {{contactName}},
 
 One more thought and I'll leave you alone.
 
@@ -175,7 +177,7 @@ Either way, appreciate your time.
 {{senderTitle}} | RiskSure.AI
 {{senderPhone}}`,
 
-  step4: `{{contactName}},
+  step4: `Hi {{contactName}},
 
 I've reached out a few times about how {{companyName}} handles subbie insurance compliance - haven't heard back, so I'll assume the timing isn't right.
 
@@ -190,7 +192,7 @@ All the best with the projects.
   // NURTURE STEPS (5-7) — longer delays, re-engagement
   // ============================================
 
-  step5: `{{contactName}},
+  step5: `Hi {{contactName}},
 
 It's been a while since we last connected. Wanted to share a quick update.
 
@@ -203,7 +205,7 @@ If things have changed on your end and compliance is back on the radar: {{calend
 {{senderName}}
 {{senderPhone}}`,
 
-  step6: `{{contactName}},
+  step6: `Hi {{contactName}},
 
 Just a quick check-in from RiskSure.
 
@@ -215,7 +217,7 @@ Either way, hope the projects are going well.
 
 {{senderName}}`,
 
-  step7: `{{contactName}},
+  step7: `Hi {{contactName}},
 
 This will be my last note.
 

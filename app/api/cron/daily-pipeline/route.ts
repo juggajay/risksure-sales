@@ -145,6 +145,12 @@ export async function GET(request: Request) {
           continue;
         }
 
+        // Skip leads with no contact name — can't personalize
+        if (!lead.contactName || !lead.contactName.trim()) {
+          results.errors.push(`Skipped ${lead.contactEmail}: no contact name`);
+          continue;
+        }
+
         // If at max steps for initial sequence, transition to nurture
         const maxSteps = getMaxSteps(lead.tier);
         if (lead.currentSequenceStep >= maxSteps) {
