@@ -10,6 +10,8 @@ We built something that changes that - each subbie gets their own portal to uplo
 
 We'd love to show you how it works if you're interested.
 
+Or take a look yourself: https://risksure.ai
+
 {{senderName}}
 {{senderTitle}} | RiskSure.AI
 {{senderPhone}}

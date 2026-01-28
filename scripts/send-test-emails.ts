@@ -94,6 +94,8 @@ You get a timestamped audit trail of every verification - useful if WorkSafe eve
 
 Happy to show you how it works if you're interested: {{calendlyUrl}}
 
+Or take a look yourself: https://risksure.ai
+
 {{senderName}}
 {{senderTitle}} | RiskSure.AI
 {{senderPhone}}
