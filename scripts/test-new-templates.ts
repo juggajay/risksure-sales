@@ -31,7 +31,7 @@ const templateVars = {
   state: "NSW",
   senderName: "Jayson",
   senderTitle: "Founder",
-  senderPhone: "0412 345 678",
+  senderPhone: "0449 228 921",
   calendlyUrl: "https://calendly.com/jaysonryan2107",
   demoVideoUrl: "https://risksure.ai/demo",
   unsubscribeUrl: "https://sales.risksure.ai/unsubscribe/test-token",

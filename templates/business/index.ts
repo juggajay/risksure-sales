@@ -21,7 +21,7 @@ Worth a quick chat about how this could work for your projects?
 
 Jayson
 Head of Growth | RiskSure.AI
-0412 345 678
+0449 228 921
 
 If this isn't relevant for ${params.companyName}, just let me know.`;
 }
@@ -39,7 +39,7 @@ Is this a problem you're dealing with?
 
 Jayson
 Head of Growth | RiskSure.AI
-0412 345 678
+0449 228 921
 
 If this isn't relevant for ${params.companyName}, just let me know.`;
 }

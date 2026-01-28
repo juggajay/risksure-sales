@@ -283,7 +283,7 @@ function replaceVariables(template: string, params: TemplateParams): string {
     state: params.state || "NSW",
     senderName: params.senderName || "Jayson",
     senderTitle: params.senderTitle || "Founder",
-    senderPhone: params.senderPhone || "0412 345 678",
+    senderPhone: params.senderPhone || "0449 228 921",
     demoVideoUrl: params.demoVideoUrl || "https://risksure.ai/demo",
   };
 

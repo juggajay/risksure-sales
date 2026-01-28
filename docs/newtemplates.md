@@ -19,7 +19,7 @@ All templates support these variables:
 | `{{state}}` | Australian state | "NSW" |
 | `{{senderName}}` | Sender's first name | "Jayson" |
 | `{{senderTitle}}` | Sender's title | "Founder" |
-| `{{senderPhone}}` | Sender's phone | "0412 345 678" |
+| `{{senderPhone}}` | Sender's phone | "0449 228 921" |
 | `{{calendlyUrl}}` | Demo booking link | "https://calendly.com/risksure/demo" |
 | `{{unsubscribeUrl}}` | Unsubscribe link | "https://sales.risksure.ai/unsubscribe/{{token}}" |
 

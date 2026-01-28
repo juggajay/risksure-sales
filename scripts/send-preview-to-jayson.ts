@@ -63,7 +63,7 @@ async function generateEmail(enrichment: any, companyName: string) {
     "{{calendlyUrl}}": "https://calendly.com/risksure/demo",
     "{{senderName}}": "Jayson",
     "{{senderTitle}}": "Founder",
-    "{{senderPhone}}": "0412 345 678",
+    "{{senderPhone}}": "0449 228 921",
     "{{demoVideoUrl}}": "https://risksure.ai/demo",
   };
 

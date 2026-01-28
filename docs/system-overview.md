@@ -226,7 +226,7 @@ Worth a quick chat about how this could work for your projects?
 
 Jayson
 Head of Growth | RiskSure.AI
-0412 345 678
+0449 228 921
 
 If this isn't relevant for Built Pty Ltd, just let me know.`
 ```

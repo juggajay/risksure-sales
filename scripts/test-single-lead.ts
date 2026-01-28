@@ -21,7 +21,7 @@ const RECIPIENT = "jaysonryan2107@gmail.com";
 const SENDER = {
   name: process.env.SENDER_NAME || "Jayson",
   title: process.env.SENDER_TITLE || "Founder",
-  phone: process.env.SENDER_PHONE || "0412 345 678",
+  phone: process.env.SENDER_PHONE || "0449 228 921",
 };
 
 const CALENDLY_URL = process.env.CALENDLY_BOOKING_URL || "https://calendly.com/risksure/demo";
