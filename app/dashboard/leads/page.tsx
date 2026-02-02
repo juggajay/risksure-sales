@@ -124,9 +124,11 @@ export default function LeadsPage() {
     { value: "ready", label: "Ready" },
     { value: "contacted", label: "Contacted" },
     { value: "opened", label: "Opened" },
+    { value: "clicked", label: "Clicked" },
     { value: "replied", label: "Replied" },
     { value: "demo_scheduled", label: "Demo Scheduled" },
     { value: "bounced", label: "Bounced" },
+    { value: "unsubscribed", label: "Unsubscribed" },
   ];
 
   const tierOptions = [
