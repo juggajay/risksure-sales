@@ -125,12 +125,6 @@ If information is limited, make reasonable estimates based on company type and m
     if (research.decisionMakers?.length > 0) score += 20;
 
     // Step 6: Generate personalized opener
-    const tierValueProps = {
-      velocity: "save hours every week on manual certificate checking",
-      compliance: "scale your compliance process without adding headcount",
-      business: "get portfolio-wide visibility and executive compliance reporting",
-    };
-
     const openerResult = await generateStructured<{ opener: string }>(
       `
 Write a personalized email opener for cold outreach to:
