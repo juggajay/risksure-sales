@@ -7,22 +7,49 @@ import crypto from "crypto";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-function verifySignature(payload: string, signature: string): boolean {
+function verifySignature(
+  payload: string,
+  svixId: string | null,
+  svixTimestamp: string | null,
+  svixSignature: string | null
+): boolean {
   if (!process.env.RESEND_WEBHOOK_SECRET) return true; // Skip in dev
+  if (!svixId || !svixTimestamp || !svixSignature) return false;
 
+  // Resend uses Svix for webhooks - secret has whsec_ prefix that needs to be stripped
+  const secret = process.env.RESEND_WEBHOOK_SECRET.startsWith("whsec_")
+    ? process.env.RESEND_WEBHOOK_SECRET.slice(6)
+    : process.env.RESEND_WEBHOOK_SECRET;
+
+  // Decode the base64 secret
+  const secretBytes = Buffer.from(secret, "base64");
+
+  // Create the signed content: timestamp.payload
+  const signedContent = `${svixId}.${svixTimestamp}.${payload}`;
+
+  // Compute expected signature
   const expectedSignature = crypto
-    .createHmac("sha256", process.env.RESEND_WEBHOOK_SECRET)
-    .update(payload)
-    .digest("hex");
+    .createHmac("sha256", secretBytes)
+    .update(signedContent)
+    .digest("base64");
 
-  try {
-    return crypto.timingSafeEqual(
-      Buffer.from(signature),
-      Buffer.from(expectedSignature)
-    );
-  } catch {
-    return false;
-  }
+  // Parse the signature header (format: v1,signature1 v1,signature2 ...)
+  const signatures = svixSignature.split(" ").map((sig) => {
+    const [, value] = sig.split(",");
+    return value;
+  });
+
+  // Check if any signature matches
+  return signatures.some((sig) => {
+    try {
+      return crypto.timingSafeEqual(
+        Buffer.from(sig, "base64"),
+        Buffer.from(expectedSignature, "base64")
+      );
+    } catch {
+      return false;
+    }
+  });
 }
 
 interface ResendTag {
@@ -32,11 +59,15 @@ interface ResendTag {
 
 export async function POST(request: Request) {
   const payload = await request.text();
-  const signature = request.headers.get("resend-signature") || "";
+
+  // Resend uses Svix for webhooks
+  const svixId = request.headers.get("svix-id");
+  const svixTimestamp = request.headers.get("svix-timestamp");
+  const svixSignature = request.headers.get("svix-signature");
 
   // Verify signature in production
   if (process.env.NODE_ENV === "production") {
-    if (!verifySignature(payload, signature)) {
+    if (!verifySignature(payload, svixId, svixTimestamp, svixSignature)) {
       return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
     }
   }
