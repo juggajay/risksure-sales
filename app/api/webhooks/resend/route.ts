@@ -56,11 +56,6 @@ function verifySignature(
   });
 }
 
-interface ResendTag {
-  name: string;
-  value: string;
-}
-
 export async function POST(request: Request) {
   const payload = await request.text();
 
@@ -78,14 +73,12 @@ export async function POST(request: Request) {
 
   const { type, data } = JSON.parse(payload);
 
-  // Extract tags
-  const tags: ResendTag[] = data.tags || [];
-  const leadIdStr = tags.find((t) => t.name === "lead_id")?.value;
-  const variant = tags.find((t) => t.name === "variant")?.value as "A" | "B" | undefined;
-  const tier = tags.find((t) => t.name === "tier")?.value;
-  const sequenceStep = parseInt(
-    tags.find((t) => t.name === "sequence_step")?.value || "0"
-  );
+  // Extract tags - Resend sends tags as object { key: value }
+  const tagsObj: Record<string, string> = data.tags || {};
+  const leadIdStr = tagsObj["lead_id"];
+  const variant = tagsObj["variant"] as "A" | "B" | undefined;
+  const tier = tagsObj["tier"];
+  const sequenceStep = parseInt(tagsObj["sequence_step"] || "0");
 
   if (!leadIdStr) {
     return NextResponse.json({ received: true, skipped: true });
