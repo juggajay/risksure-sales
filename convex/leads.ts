@@ -477,6 +477,31 @@ export const setDemoScheduled = mutation({
   },
 });
 
+export const updateEmail = mutation({
+  args: {
+    leadId: v.id("leads"),
+    newEmail: v.string(),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.leadId, {
+      contactEmail: args.newEmail.toLowerCase(),
+      emailValidated: false,
+      emailValidationResult: undefined,
+      status: "new",
+      updatedAt: Date.now(),
+    });
+
+    await ctx.db.insert("activities", {
+      leadId: args.leadId,
+      activityType: "email_updated",
+      description: `Email updated to ${args.newEmail}`,
+      createdAt: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
 // ============================================
 // NURTURE QUERIES
 // ============================================

@@ -147,6 +147,7 @@ export default defineSchema({
       v.literal("email_opened"),
       v.literal("email_clicked"),
       v.literal("email_replied"),
+      v.literal("email_updated"),
       v.literal("demo_scheduled"),
       v.literal("demo_completed"),
       v.literal("status_change"),

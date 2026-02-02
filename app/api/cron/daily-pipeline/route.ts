@@ -190,7 +190,7 @@ export async function GET(request: Request) {
         const plainText = getPlainTextTemplate(lead.tier, step, variant, templateParams);
         const html = plainText ? undefined : getTemplate(lead.tier, step, variant, templateParams);
 
-        const subject = getSubject(lead.tier, step, variant, lead.companyName);
+        const subject = getSubject(lead.tier, step, variant, lead.companyName, lead.contactName, lead.state);
 
         // Send email - plain text lands in Gmail Primary
         const result = await sendEmail({
@@ -233,8 +233,8 @@ export async function GET(request: Request) {
             sequenceStep: step,
             variant,
             eventType: "sent",
-            subjectA: getSubject(lead.tier, step, "A", lead.companyName),
-            subjectB: getSubject(lead.tier, step, "B", lead.companyName),
+            subjectA: getSubject(lead.tier, step, "A", lead.companyName, lead.contactName, lead.state),
+            subjectB: getSubject(lead.tier, step, "B", lead.companyName, lead.contactName, lead.state),
           });
 
           results.emailsSent++;
@@ -296,7 +296,7 @@ export async function GET(request: Request) {
           };
 
           const plainText = getPlainTextTemplate(lead.tier, step, variant, templateParams);
-          const subject = getSubject(lead.tier, step, variant, lead.companyName);
+          const subject = getSubject(lead.tier, step, variant, lead.companyName, lead.contactName, lead.state);
 
           const result = await sendEmail({
             to: lead.contactEmail,
